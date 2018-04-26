@@ -1,0 +1,27 @@
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Hospital One -->
+  <div *ngFor = "let hospital of hospitals">
+      <hr>    
+      <div class="row">
+          <div class="col-md-7">
+              <a href="#">
+                  <img class="img-responsive" src="http://placehold.it/700x300" alt="">
+              </a>
+          </div>
+          <div class="col-md-5">
+              <h3>{{hospital.name}}</h3>
+              <h4>Subheading</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+              <a class="btn btn-primary" routerLink='/hospital/{{hospital._id}}'>View Hospital <span class="glyphicon glyphicon-chevron-right"></span></a>
+          </div>
+        </div>
+        <!-- /.row -->
+        <hr>      
+  </div>
+  <!--<app-pagination></app-pagination>-->
+  <!-- /.row -->
+  
+  <hr>
+  </div>
