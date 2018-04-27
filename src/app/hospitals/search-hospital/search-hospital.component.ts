@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostBinding } from '@angular/core';
 import { HospitalListService } from '../hospital-list.service';
-
 @Component({
   selector: 'app-search-hospital',
   templateUrl: './search-hospital.component.html',
-  styleUrls: ['./search-hospital.component.css']
+  styleUrls: ['./search-hospital.component.css'],
 })
 export class SearchHospitalComponent implements OnInit {
+
   hospitals;
   constructor(private hospitalsService : HospitalListService) { }
 

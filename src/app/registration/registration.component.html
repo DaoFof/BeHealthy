@@ -1,3 +1,94 @@
-<p>
-  registration works!
-</p>
+<hr>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+
+      </div>
+      <div class="col-xs-9">
+          <div class="main-content">
+
+              <!-- You only need this form and the form-register.css -->
+          
+              <form class="form-register" #regForm = "ngForm" (ngSubmit)="onSubmit()">
+          
+                  <div class="form-register-with-email">
+          
+                      <div class="form-white-background">
+          
+                          <div class="form-title-row">
+                              <h1>Create an account</h1>
+                          </div>
+          
+                          <div class="form-row">
+                              <label>
+                                  <span>First name</span>
+                                  <input required #firstName = "ngModel" [(ngModel)]="model.firstName"type="text" name="name">
+                              </label>
+                          </div>
+                          <div class="form-row">
+                              <label>
+                                  <span>Last name</span>
+                                  <input required #lastName="ngModel" [(ngModel)]="model.lastName" type="text" name="name">
+                              </label>
+                          </div>
+                          <div class="form-row">
+                              <label>
+                                  <span>User type</span>
+                                  <select name="dropdown">
+                                      <option>Choose an option</option>
+                                      <option>Patient</option>
+                                      <option>Doctor</option>
+                                      <option>Hospital Manager</option>
+                                  </select>
+                              </label>
+                          </div>
+                          <div class="form-row">
+                              <label>
+                                  <span>Email</span>
+                                  <input required [(ngModel)]="model.email" #email="ngModel" type="email" name="email">
+                              </label>
+                          </div>
+          
+                          <div class="form-row">
+                              <label>
+                                  <span>Password</span>
+                                  <input required #password="ngModel" [(ngModel)]="model.password" type="password" name="password">
+                              </label>
+                          </div>
+          
+                          <div class="form-row no-margin-bottom">
+                              <label class="form-checkbox">
+                                  <input type="checkbox" name="checkbox" checked>
+                                  <span>I agree to the <a href="#">terms and conditions</a></span>
+                              </label>
+                          </div>
+          
+                          <div class="form-row no-margin-bottom">
+                              <button type="submit">Register</button>
+                          </div>
+                          <a href="#" class="form-log-in-with-existing">Already have an account? Login here &rarr;</a>
+          
+                      </div>
+          
+                     
+          
+                  </div>
+          
+                  <div class="form-sign-in-with-social">
+          
+                      <div class="form-row form-title-row">
+                          <span class="form-title">Sign in with</span>
+                      </div>
+          
+                      <a href="#" class="form-google-button">Google</a>
+                      <a href="#" class="form-facebook-button">Facebook</a>
+                      <a href="#" class="form-twitter-button">Twitter</a>
+          
+                  </div>
+          
+              </form>
+          
+          </div>
+      </div>
+    </div>
+</div>

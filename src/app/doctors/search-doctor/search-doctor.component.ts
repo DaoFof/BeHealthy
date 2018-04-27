@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorsService } from '../doctors.service';
 
 @Component({
   selector: 'app-search-doctor',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-doctor.component.css']
 })
 export class SearchDoctorComponent implements OnInit {
-
-  constructor() { }
+  doctors;
+  constructor(private doctorService: DoctorsService) { }
 
   ngOnInit() {
+    this.getDoctors();
   }
-
+  async getDoctors(){
+    this.doctors = await this.doctorService.getDoctors();
+  }
 }

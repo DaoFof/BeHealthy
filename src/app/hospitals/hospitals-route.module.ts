@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 import {HospitalDetailComponent} from './hospital-detail/hospital-detail.component';
 import {SearchHospitalComponent} from './search-hospital/search-hospital.component';
@@ -12,7 +13,10 @@ import {SearchHospitalRoutingModule} from './search-hospital-routing.module';
   imports: [
     CommonModule,
     HttpClientModule,
-    SearchHospitalRoutingModule
+    SearchHospitalRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCHQyx6ONu1Djj6FXR_G-NPcNbh-eYK9tA' //map  key
+    }),
   ],
   declarations: [
     HospitalDetailComponent,
