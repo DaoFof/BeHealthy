@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {RegistrationService} from '../registration.service';
 import {Registration} from './registration';
 
@@ -16,11 +16,46 @@ export class RegistrationComponent implements OnInit {
   constructor(private registrationService: RegistrationService, private router: Router) { }
   responseBody;
   headers;
-  ngOnInit() {
+
+  myform: FormGroup;
+  firstName: FormControl; 
+  lastName: FormControl;
+  email: FormControl;
+  password: FormControl;
+  userType: FormControl;
+  
+  createFormControls() { 
+    this.firstName = new FormControl('', Validators.required);
+    this.lastName = new FormControl('', Validators.required);
+    this.email = new FormControl('', [
+      Validators.required,
+      Validators.pattern("[^ @]*@[^ @]*")
+    ]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8)
+    ]);
+    this.userType = new FormControl('', Validators.required);
   }
-  onSubmit(){
+  createForm() { 
+    this.myform = new FormGroup({
+      name: new FormGroup({
+        firstName: this.firstName,
+        lastName: this.lastName,
+      }),
+      email: this.email,
+      password: this.password,
+      userType: this.userType
+    });
+  }
+
+  ngOnInit() {
+    this.createFormControls();
+    this.createForm();
+  }
+    onSubmit(){
     this.submitted = true;
-    this.registrationService.registrer(this.model)
+    this.registrationService.registrer(this.myform.value)
       .subscribe(resp=>{
         console.log(resp);
         this.responseBody =  resp.body;
@@ -28,7 +63,11 @@ export class RegistrationComponent implements OnInit {
         this.headers = keys.map(key=>
         JSON.parse(`{\"${key}\": \"${resp.headers.get(key)}\"}`));
         localStorage.setItem('token', this.headers[1]['x-auth']);
-        this.router.navigate(['patientProfile']);
+        if(resp.status == 200){
+          this.router.navigate(['patientProfile']);
+        }
       })
+
+      console.log(this.myform.value);
   }
 }

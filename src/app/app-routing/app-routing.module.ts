@@ -14,7 +14,6 @@ const appRoutes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'news', component: InformationsComponent},
-  {path : 'login', component: LoginComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ]

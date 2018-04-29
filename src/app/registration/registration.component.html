@@ -1,94 +1,111 @@
-<hr>
 <div class="container">
-    <div class="row">
-      <div class="col-xs-3">
-
-      </div>
-      <div class="col-xs-9">
-          <div class="main-content">
-
-              <!-- You only need this form and the form-register.css -->
-          
-              <form class="form-register" #regForm = "ngForm" (ngSubmit)="onSubmit()">
-          
-                  <div class="form-register-with-email">
-          
-                      <div class="form-white-background">
-          
-                          <div class="form-title-row">
-                              <h1>Create an account</h1>
-                          </div>
-          
-                          <div class="form-row">
-                              <label>
-                                  <span>First name</span>
-                                  <input required #firstName = "ngModel" [(ngModel)]="model.firstName"type="text" name="name">
-                              </label>
-                          </div>
-                          <div class="form-row">
-                              <label>
-                                  <span>Last name</span>
-                                  <input required #lastName="ngModel" [(ngModel)]="model.lastName" type="text" name="name">
-                              </label>
-                          </div>
-                          <div class="form-row">
-                              <label>
-                                  <span>User type</span>
-                                  <select name="dropdown">
-                                      <option>Choose an option</option>
-                                      <option>Patient</option>
-                                      <option>Doctor</option>
-                                      <option>Hospital Manager</option>
-                                  </select>
-                              </label>
-                          </div>
-                          <div class="form-row">
-                              <label>
-                                  <span>Email</span>
-                                  <input required [(ngModel)]="model.email" #email="ngModel" type="email" name="email">
-                              </label>
-                          </div>
-          
-                          <div class="form-row">
-                              <label>
-                                  <span>Password</span>
-                                  <input required #password="ngModel" [(ngModel)]="model.password" type="password" name="password">
-                              </label>
-                          </div>
-          
-                          <div class="form-row no-margin-bottom">
-                              <label class="form-checkbox">
-                                  <input type="checkbox" name="checkbox" checked>
-                                  <span>I agree to the <a href="#">terms and conditions</a></span>
-                              </label>
-                          </div>
-          
-                          <div class="form-row no-margin-bottom">
-                              <button type="submit">Register</button>
-                          </div>
-                          <a href="#" class="form-log-in-with-existing">Already have an account? Login here &rarr;</a>
-          
-                      </div>
-          
-                     
-          
-                  </div>
-          
-                  <div class="form-sign-in-with-social">
-          
-                      <div class="form-row form-title-row">
-                          <span class="form-title">Sign in with</span>
-                      </div>
-          
-                      <a href="#" class="form-google-button">Google</a>
-                      <a href="#" class="form-facebook-button">Facebook</a>
-                      <a href="#" class="form-twitter-button">Twitter</a>
-          
-                  </div>
-          
-              </form>
-          
-          </div>
-      </div>
-    </div>
+	<div class="row box">
+			<div class="box-login box-center">
+				<div class="box-header text-center">
+					<h1>Registration</h1>
+				</div>
+				<form action="" class="box-body" [formGroup]="myform" (ngSubmit)="onSubmit()" >
+					<div class="row" formGroupName="name">
+						<div class="col-md-6">
+							<div class="form-group" >
+								<label for="firstname" class="cols-sm-2 control-label">First name
+                                    <span [ngClass]="{
+                                        'hide': !(firstName.valid && firstName.dirty)}"
+                                        class="fa fa-check"></span>
+                                    <span [ngClass]="{
+                                        'hide': !(firstName.invalid && firstName.dirty)}"
+                                        class="fa fa-times"></span>
+                                </label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+											<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+										    <input required type="text" formControlName = "firstName"class="form-control" name="firstName" id="firstname"  placeholder="Enter your First Name"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="lastname" class="cols-sm-2 control-label">Last name
+                                    <span [ngClass]="{
+                                        'hide': !(lastName.valid && lastName.dirty)}"
+                                        class="fa fa-check"></span>
+                                    <span [ngClass]="{
+                                        'hide': !(lastName.invalid && lastName.dirty)}"
+                                        class="fa fa-times"></span>
+                                </label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<input required type="text" formControlName = "lastName" class="form-control" name="lastName" id="lastname"  placeholder="Enter your Last Name"/>
+									</div>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <div [ngClass]="{
+                                'hide': !(firstName.invalid && firstName.touched) && !(lastName.invalid && lastName.touched)}"
+                                            class="alert alert-danger">
+                                        Both field are required
+                            </div>
+                    </div>
+                    
+                    
+					<div class="form-group">
+						<label for="email" class="cols-sm-2 control-label">Your Email
+                            <span [ngClass]="{
+                                'hide': !(email.valid && email.dirty)}"
+                                class="fa fa-check"></span>
+                            <span [ngClass]="{
+                                'hide': !(email.invalid && email.dirty)}"
+                                class="fa fa-times"></span>
+                        </label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+								<input required type="text" formControlName = "email" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+							</div>
+                        </div>
+                    </div>
+                    
+                    <div [ngClass]="{
+                        'hide': !(email.invalid && email.touched)}"
+                                    class="alert alert-danger">
+                                Email is required
+                    </div>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="password" class="cols-sm-2 control-label">Password</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+										<input required type="password" formControlName = "password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div [ngClass]="{
+                        'hide': !(password.errors && (password.dirty || password.touched))}"
+                                    class="alert alert-danger">
+                                    <p *ngIf="password.errors.required">Password is required</p>
+                                    <p *ngIf="password.errors.minlength">Password must be 8 characters long</p>
+                    </div>
+					<div class="form-group">
+							<label for="usertype" class="cols-sm-2 control-label">User type</label>
+							<select class="form-control" id="usertype"
+											required
+											name="userType" formControlName = "userType">
+								<option *ngFor="let type of Types" [value]="type">{{type}}</option>
+							</select>
+                    </div>
+                    <div class="form-group ">
+						<button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+					</div>
+					
+				</form>
+			</div>
+	</div>
 </div>
