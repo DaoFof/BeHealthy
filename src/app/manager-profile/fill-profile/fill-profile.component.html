@@ -1,0 +1,65 @@
+<hr>
+<!--<div class="container-fluid">
+    <div class="setting"></div>
+    <div class="setting image_picker">
+        <h2>Image</h2>
+        <div class="settings_wrap"><label class="drop_target"><div class="image_preview"></div><input id="inputFile" type="file"/></label>
+            <div class="settings_actions vertical"><a data-action="choose_from_uploaded"><i class="fa fa-picture-o"></i> Choose from Uploads</a><a class="disabled" data-action="remove_current_image"><i class="fa fa-ban"></i> Remove Current Image</a></div>
+            <div class="image_details"><label class="input_line image_title"><input type="text" placeholder="Title"/></label>
+                label.input_line.image_alt//input(type='text' placeholder='Alternative Text')
+                a.confirm(data-action='confirm_image_details')//i.fa.fa-check-circle
+            </div>
+        </div>
+    </div>
+    <div class="setting"></div>-->
+    
+  <div class="main-content">
+
+    <!-- You only need this form and the form-basic.css -->
+  
+    <form class="form-basic">
+  
+        <div class="form-title-row">
+            <h1>Form Example</h1>
+        </div>
+  
+        <div class="form-row">
+            <label>
+                <span>Contact</span>
+                <input type="text" name="contact">
+            </label>
+        </div>
+  
+        <div class="form-row">
+            <label>
+                <span>Country</span>
+                <input type="email" name="email">
+            </label>
+        </div>
+  
+        <div class="form-row">
+            <label>
+                <span>Textarea</span>
+                <textarea name="textarea"></textarea>
+            </label>
+        </div>  
+  
+        <div class="form-row">
+            <button type="submit">Submit Form</button>
+        </div>
+    </form>
+  
+  </div>
+  <div class="container">
+      <div class="row text-center">
+        <div class="registerplace">
+              <div id="floating-panel">
+                  <input id="address" type="textbox" value="Sydney, NSW">
+                  <input id="submit" type="button" value="Geocode">
+                </div>
+              <agm-map [latitude]="lat" [longitude]="lng">
+                <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="draggable" ></agm-marker>
+              </agm-map>
+        </div>
+      </div>
+  </div>

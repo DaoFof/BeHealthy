@@ -7,21 +7,21 @@
               <h3 class="card-title text-primary text-left mb-5 mt-4">Login</h3>
               <p>{{message}}</p>
               <form [formGroup] = "myform">
-                <div class="form-group" *ngIf="!authService.isLoggedIn">
+                <div class="form-group" *ngIf="!token">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                     <input type="email" required formControlName="email" class="form-control p_input" placeholder="Email" autocomplete>
                   </div>
                 </div>
-                <div class="form-group" *ngIf="!authService.isLoggedIn">
+                <div class="form-group" *ngIf="!token">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
                     <input type="password" required formControlName="password" class="form-control p_input" placeholder="Password">
                   </div>
                 </div>
                 <div class="text-center">
-                  <button (click)="login()"  *ngIf="!authService.isLoggedIn" class="btn btn-primary btn-lg">Login</button>
-                  <button (click)="logout()" *ngIf="authService.isLoggedIn"class="btn btn-info btn-lg">Log out</button>
+                  <button (click)="login()"  *ngIf="!token" class="btn btn-primary btn-lg">Login</button>
+                  <button (click)="logout()" *ngIf="authService.isLoggedIn || token"class="btn btn-danger btn-lg">Log out</button>
                 </div>
               </form>
               <div class="text-center">

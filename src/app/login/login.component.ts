@@ -12,13 +12,14 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   
   constructor(public authService: AuthService, public router: Router) {
+    this.token = localStorage.getItem('token');
     this.setMessage('');
   }
   message: string;
   myform: FormGroup;
   email: FormControl;
   password: FormControl;
-  
+  token;
   createFormControls(){
     this.email = new FormControl('', [
       Validators.required,
@@ -72,6 +73,6 @@ export class LoginComponent implements OnInit {
     await this.authService.logout();
     var msg = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
     this.setMessage(msg);
-    this.router.navigate(['/home']);
+    window.location.reload();
   }
 }

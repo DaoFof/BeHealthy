@@ -9,9 +9,9 @@ import { slideInDownAnimation }   from '../../animations';
 })
 export class MyprescriptionsComponent implements OnInit {
 
-  @HostBinding('@routeAnimation') routeAnimation = true;  
+  /*@HostBinding('@routeAnimation') routeAnimation = true;  
   @HostBinding('style.display')   display = 'block';
-  @HostBinding('style.position')  position = 'absolute';
+  @HostBinding('style.position')  position = 'absolute';*/
   constructor() { }
 
   ngOnInit() {

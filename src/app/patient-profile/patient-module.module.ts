@@ -7,21 +7,19 @@ import { MyrecordsComponent } from './myrecords/myrecords.component';
 import { MyhospitalsComponent } from './myhospitals/myhospitals.component';
 import { MyprescriptionsComponent } from './myprescriptions/myprescriptions.component';
 import { MyconsultationsComponent } from './myconsultations/myconsultations.component';
-import { importType } from '@angular/compiler/src/output/output_ast';
-
+import {ShareComponentModule} from '../share-component/share-component.module';
 import {PatientRoutingModule} from './patient-routing.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    ShareComponentModule,
     PatientRoutingModule
   ],
   declarations: [
     PatientProfileComponent,
-    MydoctorsComponent,
     MyrecordsComponent,
-    MyhospitalsComponent,
     MyprescriptionsComponent,
     MyconsultationsComponent
   ]

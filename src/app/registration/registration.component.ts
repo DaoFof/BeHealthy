@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
         JSON.parse(`{\"${key}\": \"${resp.headers.get(key)}\"}`));
         localStorage.setItem('token', this.headers[1]['x-auth']);
         if(resp.status == 200){
-          this.router.navigate(['patientProfile']);
+          this.router.navigate(['fillprofile']);
         }
       })
 
