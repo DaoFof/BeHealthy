@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
 import {ManagerProfileComponent} from './manager-profile/manager-profile.component';
@@ -14,6 +14,7 @@ import {ShareComponentModule} from '../share-component/share-component.module';
 import { FillProfileComponent } from './fill-profile/fill-profile.component';
 
 import {GoogleMapService} from '../google-map.service';
+import {RegistrationService} from '../registration.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {GoogleMapService} from '../google-map.service';
     ShareComponentModule,
     ManagerRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCHQyx6ONu1Djj6FXR_G-NPcNbh-eYK9tA' //map  key
     }),
@@ -29,6 +31,6 @@ import {GoogleMapService} from '../google-map.service';
     ManagerProfileComponent,
     NewHospitalComponent,
     FillProfileComponent
-  ], providers:[GoogleMapService]
+  ], providers:[GoogleMapService, RegistrationService]
 })
 export class ManagerModuleModule { }

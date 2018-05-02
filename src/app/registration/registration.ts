@@ -8,6 +8,6 @@ export class Registration {
         public country?: string,
         public city?: string,
         public userType?: string,
-        public uniqueID?: string
+        public pan?: string
       ) {  }
 }

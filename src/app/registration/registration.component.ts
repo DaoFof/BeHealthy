@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {RegistrationService} from '../registration.service';
-import {Registration} from './registration';
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +11,6 @@ import {Registration} from './registration';
 export class RegistrationComponent implements OnInit {
   Types = ['Patient','Doctor', 'Hospital Manager'];
   submitted = false;
-  model = new Registration('', '', '', '', '');
   constructor(private registrationService: RegistrationService, private router: Router) { }
   responseBody;
   headers;

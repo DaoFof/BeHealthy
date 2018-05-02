@@ -62,25 +62,25 @@ export class GoogleMapService {
   geocode(address, callback){
     this.geocoder = new google.maps.Geocoder();
     this.geocodeAddress(this.geocoder, this.map, address, function(location){
+      console.log(location);
       callback(location);
     });
   }
-  private geocodeAddress(geocoder, resultsMap, address, fn){
+  private geocodeAddress(geocoder, resultsMap, address,fn){
     geocoder.geocode({address}, function(results, status){
       if(status==='OK'){
         console.log(results[0]);
-        var location = {
+        var latlng = {
           'lat': results[0].geometry.location.lat(),
           'lng': results[0].geometry.location.lng()
         };
-        fn(location);
+        fn(latlng);
         resultsMap.setCenter(results[0].geometry.location);
-        var Marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
           map: resultsMap,
           position: results[0].geometry.location,
           draggable: true
         });
-        //console.log(locat);
       }else{
         alert('Geocode was not successful for this address');
       }
@@ -117,7 +117,6 @@ export class GoogleMapService {
   private showPosition(position) {
     let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
-    console.log(location);
     
     if (!this.marker) {
       this.marker = new google.maps.Marker({

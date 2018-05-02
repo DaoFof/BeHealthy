@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -14,8 +14,22 @@ export class RegistrationService {
   registrerPOST(url: string, data){
     return this.http.post(url,data,{observe: 'response'});
   }
+  updatePATCH(url:string, data: any){
+    var token = localStorage.getItem('token');
+    let headers = new HttpHeaders(
+      {'x-auth':token}
+    );
+    return this.http.patch(url, data, {headers, observe:'response'});
+  }
+
   registrer(data){
     let url = `${this.adress}/users`;
     return this.registrerPOST(url, data);
+  }
+  updateInfo(data){
+    let url = `${this.adress}/user`;
+    var res =  this.updatePATCH(url, data);
+    console.log(res);
+    return res;
   }
 }
