@@ -28,7 +28,7 @@ export class AuthService {
           JSON.parse(`{\"${key}\": \"${resp.headers.get(key)}\"}`));  
           localStorage.setItem('token', this.headers[1]['x-auth']);
           this.responseBody = resp.body;
-          return Promise.resolve(true);
+          return Promise.resolve(resp.body['userType']);
     }else{
       return Promise.reject;
     }

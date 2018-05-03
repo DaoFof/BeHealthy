@@ -13,20 +13,13 @@
                                 <h2>Image</h2>
                                 <div class="settings_wrap">
                                     <label class="drop_target">
-                                        <input id="inputFile" type="file"  formControlName="image" (change)="readUrl($event)">
+                                        <input id="inputFile" type="file" (change)="readUrl($event)">
                                     </label>
                                     <div class="image_preview">
-                                            <img [src]="imgurl" width="75px"height="75px" alt="">
-                                        </div>
-                                    <div class="image_details">
-                                        <label class="input_line image_title">
-                                            <input type="text" placeholder="Title"  required>
-                                        </label>
+                                        <img [src]="imgurl" width="75px" height="75px" alt="">
                                     </div>
                                 </div>
                             </div>
-                            
-                            
                         </div>
                         <div class="form-group">
                             <label for="contact"> Contact</label>
@@ -58,7 +51,7 @@
                             </div>
                         <hr>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block">
+                            <button class="btn btn-primary btn-block" [disabled] ="myform.invalid">
                                 Submit
                             </button>
                         </div>

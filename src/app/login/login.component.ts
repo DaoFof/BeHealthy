@@ -49,15 +49,20 @@ export class LoginComponent implements OnInit {
   async login() {
     this.message = 'Trying to log in ...';
  
-      var resp = await this.authService.login(this.myform.value);
-      console.log(typeof(resp));
+      var userType = await this.authService.login(this.myform.value);
+      console.log(userType);
       
-      if(this.authService.isLoggedIn && resp) {
+      if(this.authService.isLoggedIn && userType) {
       var msg = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
       this.setMessage(msg);
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/patientProfile';
+        var path;
+        if (userType == 'Hospital Manager') path='/managerProfile'
+        else if (userType == 'Patient') path ='/patientProfile'
+        else
+          path = '/doctorProfile'
+        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : path;
  
         // Redirect the user
         this.router.navigate([redirect]);

@@ -15,6 +15,7 @@ import { FillProfileComponent } from './fill-profile/fill-profile.component';
 
 import {GoogleMapService} from '../google-map.service';
 import {RegistrationService} from '../registration.service';
+import { FileUploadService } from '../file-upload.service';
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import {RegistrationService} from '../registration.service';
     ManagerProfileComponent,
     NewHospitalComponent,
     FillProfileComponent
-  ], providers:[GoogleMapService, RegistrationService]
+  ], providers: [GoogleMapService, RegistrationService, FileUploadService]
 })
 export class ManagerModuleModule { }
