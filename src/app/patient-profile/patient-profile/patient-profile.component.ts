@@ -6,7 +6,7 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./patient-profile.component.css']
 })
 export class PatientProfileComponent implements OnInit {
-  
+  toggleSidebar = false;
   constructor() { }
 
   ngOnInit() {

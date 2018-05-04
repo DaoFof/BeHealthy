@@ -2,7 +2,7 @@
 <hr>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-xs-5">
             <div class="row main">
                 <div class="col-md-offset-2 col-md-8 text-center">
                     <form action="" [formGroup]="myform" (ngSubmit)="onSubmit()">
@@ -42,9 +42,19 @@
                             <small>For better accuracy find you on map after filling <span class="fa fa-arrow-right"></span></small>
                         </div>
                         <hr>
-                        <div class="form-group">
-                            <label for="pan">Personal ID or PAN</label>
-                            <input type="text" name="pan" formControlName = "pan" class="form-control" id="pan">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pan">Personal ID or PAN</label>
+                                    <input type="text" name="pan" formControlName="pan" class="form-control" id="pan">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="job">Job</label>
+                                    <input type="text" name="pan" formControlName="job" class="form-control" id="job">
+                                </div>
+                            </div>
                         </div>
                         <div class="alert alert-danger" *ngIf="(submitAttempt) && (myform.invalid)">
                                 {{msg}}
@@ -55,14 +65,16 @@
                                 Submit
                             </button>
                         </div>
+                        <pre>{{this.myform.value| json}}</pre>
+                        <pre>{{this.job.value | json}}</pre>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-xs-7">
             <div class="row">
                     <h3 class="text-center"> Find your location</h3>
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-xs-12">
                     <button (click)="setMapType('roadmap')" class="btn btn-primary">Road map</button>
                     <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
                 </div>

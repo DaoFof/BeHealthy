@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import {ManagerProfileComponent} from './manager-profile/manager-profile.component';
 import { MydoctorsComponent } from '../patient-profile/mydoctors/mydoctors.component';
@@ -16,6 +17,8 @@ import { FillProfileComponent } from './fill-profile/fill-profile.component';
 import {GoogleMapService} from '../google-map.service';
 import {RegistrationService} from '../registration.service';
 import { FileUploadService } from '../file-upload.service';
+import { HospitalService } from '../hospital.service';
+import { DepartementService } from '../departement.service';
 
 @NgModule({
   imports: [
@@ -27,11 +30,16 @@ import { FileUploadService } from '../file-upload.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCHQyx6ONu1Djj6FXR_G-NPcNbh-eYK9tA' //map  key
     }),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   declarations: [
     ManagerProfileComponent,
     NewHospitalComponent,
     FillProfileComponent
-  ], providers: [GoogleMapService, RegistrationService, FileUploadService]
+  ], providers: [GoogleMapService,
+     RegistrationService, 
+     FileUploadService, 
+     HospitalService,
+    DepartementService]
 })
 export class ManagerModuleModule { }

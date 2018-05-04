@@ -19,9 +19,9 @@ export class HospitalDetailComponent implements OnInit {
   
   hospital;
   hospitalLocation: string;
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  draggable = true;
+  lat: Number;
+  lng: Number;
+  draggable = false;
   constructor(  
       private route: ActivatedRoute,
       private router: Router,
@@ -42,6 +42,8 @@ export class HospitalDetailComponent implements OnInit {
     console.log(id);
     this.hospital =  await this.hospitalsService.getHospital(id);
     console.log(this.hospital);
+    this.lat = +this.hospital['lat'];
+    this.lng = +this.hospital['lng'];
     this.hospitalLocation = this.hospital.name + ', ' + this.hospital.city + ', ' + this.hospital.country;
   }
 }

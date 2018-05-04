@@ -26,6 +26,7 @@ export class FillProfileComponent implements OnInit {
   country: FormControl;
   city: FormControl;
   pan: FormControl;
+  job: FormControl;
   responseBody;
   headers;
   fileToUpload : any;
@@ -41,13 +42,15 @@ export class FillProfileComponent implements OnInit {
     this.country = new FormControl('', Validators.required);
     this.pan = new FormControl('', Validators.required);
     this.city = new FormControl('', Validators.required);
+    this.job = new FormControl('');
   }
   createForm() { 
     this.myform = new FormGroup({
       contact: this.contact,
       country: this.country,
       pan: this.pan,
-      city: this.city
+      city: this.city,
+      job: this.job
     });
   }
   readUrl(event:any) {
@@ -75,8 +78,14 @@ export class FillProfileComponent implements OnInit {
       this.msg = "Please fill all above fields";
     }
     this.addFile();
-    this.myform.value.lat = this.location.lat;
-    this.myform.value.lng = this.location.lng;
+    if(this.location){
+      this.myform.value.lat = this.location.lat;
+      this.myform.value.lng = this.location.lng;
+    }
+    if(this.job.value!==""){
+      this.myform.value.manager = {'job': this.myform.value.job};
+      delete this.myform.value.job;
+    }
     console.log(this.myform.value);
     this.registrationService.updateInfo(this.myform.value)
       .subscribe(resp=>{
