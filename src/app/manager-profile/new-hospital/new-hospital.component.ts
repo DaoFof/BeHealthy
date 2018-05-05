@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { GoogleMapService } from '../../google-map.service';
@@ -14,7 +14,7 @@ import { DepartementService } from '../../departement.service';
 })
 export class NewHospitalComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
-  constructor(private googleMapService: GoogleMapService, private hospitalService: HospitalService, private departementService: DepartementService, private router: Router) { }
+  constructor(private googleMapService: GoogleMapService, private hospitalService: HospitalService, private departementService: DepartementService, private router: Router, private activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
     this.googleMapService.init(this.gmapElement);
@@ -25,7 +25,7 @@ export class NewHospitalComponent implements OnInit {
   //Dropdown 
   selectedItems = [];
   dropdownSettings = {};
-  department;
+  department = [];
   onItemSelect(item: any) {
     console.log(item);
   }
@@ -35,15 +35,14 @@ export class NewHospitalComponent implements OnInit {
   dropdownSetup(){
     this.departementService.getDepartements().
       subscribe(resp => {
-        console.log(resp.body['departements']);
-        resp.body['departements'].forEach(element => {
+        console.log(resp.body['departmentsToSend']);
+        /*resp.body['departmentsToSend'].forEach(element => {
           element.departmentId = element._id;
           element.departmentName = element.name;
           delete element._id;
           delete element.name;
-        });
-        this.departement = resp.body['departements'];
-        
+        });*/
+        this.department = resp.body['departmentsToSend'];        
       })
     this.dropdownSettings = {
       singleSelection: false,
@@ -71,7 +70,7 @@ export class NewHospitalComponent implements OnInit {
   contact: FormControl;
   email: FormControl;
   name: FormControl;
-  departement: FormControl;
+  departmentControl: FormControl;
   createFormControls() {
     this.name = new FormControl('', Validators.required);
     this.contact = new FormControl('', Validators.required);
@@ -81,7 +80,7 @@ export class NewHospitalComponent implements OnInit {
       Validators.required,
       Validators.pattern("[^ @]*@[^ @]*")
     ]);
-    this.departement = new FormControl('')
+    this.departmentControl = new FormControl('')
   }
   createForm() {
     this.myform = new FormGroup({
@@ -90,7 +89,7 @@ export class NewHospitalComponent implements OnInit {
       name: this.name,
       contact: this.contact,
       email: this.email,
-      departement: this.departement
+      departmentControl: this.departmentControl
     });
   }
 
@@ -103,6 +102,9 @@ export class NewHospitalComponent implements OnInit {
       subscribe(resp => {
         this.responseBody = resp.body;
         console.log(resp);
+        if(resp.status == 200){
+          this.router.navigate(['../myhospitals'], {relativeTo: this.activatedRoute});
+        }
     })
   }
 /*End form controls */
@@ -118,7 +120,7 @@ export class NewHospitalComponent implements OnInit {
 
   async geocode() {
     console.log(this.address)
-    //this.getLocation(await this.googleMapService.geocode(this.address));
+    this.getLocation(await this.googleMapService.geocode(this.address));
   }
   getLocation(location) {
     this.location = {
