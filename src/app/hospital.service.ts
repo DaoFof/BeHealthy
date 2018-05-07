@@ -11,16 +11,28 @@ export class HospitalService {
   herokuApiRoot: string = "https://shrouded-wildwood-20663.herokuapp.com"
   localApi: string = "http://localhost:3000";
   adress = this.localApi;
-  registerHospitalPost(url: string, data) {
+  private registerHospitalPost(url: string, data) {
     var token = localStorage.getItem('token');
     let headers = new HttpHeaders(
       { 'x-auth': token }
     );
     return this.http.post(url, data, {headers, observe: 'response' });
   }
+  private getManagerHospitals(url){
+    var token = localStorage.getItem('token');
+    let headers = new HttpHeaders(
+      { 'x-auth': token }
+    );
+    return this.http.get(url, {headers, observe: 'response' });
+  }
 
   newHospital(data) {
     let url = `${this.adress}/hospital`;
     return this.registerHospitalPost(url, data);
+  }
+
+  listManagerHospital(){
+    let url = `${this.adress}/managerHospital`;
+    return this.getManagerHospitals(url);
   }
 }

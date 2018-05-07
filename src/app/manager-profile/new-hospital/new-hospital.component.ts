@@ -35,13 +35,6 @@ export class NewHospitalComponent implements OnInit {
   dropdownSetup(){
     this.departementService.getDepartements().
       subscribe(resp => {
-        console.log(resp.body['departmentsToSend']);
-        /*resp.body['departmentsToSend'].forEach(element => {
-          element.departmentId = element._id;
-          element.departmentName = element.name;
-          delete element._id;
-          delete element.name;
-        });*/
         this.department = resp.body['departmentsToSend'];        
       })
     this.dropdownSettings = {

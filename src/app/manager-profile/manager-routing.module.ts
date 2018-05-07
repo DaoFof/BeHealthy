@@ -17,6 +17,7 @@ const managerProfileRoutes: Routes = [
     children:[
       {
         path:'',
+        canActivateChild: [AuthGuard],
         children:[
           {
             path: 'mydoctors',

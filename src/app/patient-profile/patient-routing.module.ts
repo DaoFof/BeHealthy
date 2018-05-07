@@ -17,6 +17,7 @@ const patientProfileRoutes: Routes = [
     children: [
       {
        path:'',
+       canActivateChild: [AuthGuard],
        children:[
         {
           path: 'mydoctors',
