@@ -28,7 +28,13 @@
                         <span class="fa fa-arrow-right">See more detail</span>
                     </button>
                     <button class="btn btn-danger" (click)="openModal(template)">
-                    <span class="fa fa-trash">Delete hospital</span></button></div>
+                        <span class="fa fa-trash">Delete hospital</span>
+                    </button>
+                    <button class="btn btn-primary" (click)="editPage(hospital._id)">
+                        <span class="fa fa-pen">Edit hospital</span>
+                    </button>
+                </div>
+                    
             </div>
         </div>
         <hr>

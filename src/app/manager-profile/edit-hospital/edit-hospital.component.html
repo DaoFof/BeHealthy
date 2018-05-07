@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="text-center">Edit</h1>
+    <div class="col-md-5 col-xs-12">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8 text-center">
+          <form action="" [formGroup]="myform" (ngSubmit)="onSubmit()">
+            <h2 class="text-center"> Fill the form</h2>
+            <hr>
+            <div class="form-group">
+              <label for="name"> Hospital name</label>
+              <input type="text" name="name" formControlName="name" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="departmentControl">Choose departements</label>
+              <ng-multiselect-dropdown 
+                [placeholder]="'Select departements'" 
+                [data]="department" 
+                 formControlName = "departmentControl"
+                [(ngModel)]="selectedItems"  
+                [settings]="dropdownSettings" 
+                (onSelect)="onItemSelect($event)" 
+                (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="country"> Country</label>
+                  <input type="text" name="country" formControlName="country" class="form-control" id="country">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" name="city" class="form-control" formControlName="city" id="city">
+                </div>
+              </div>
+              <small>
+                <u>For better accuracy find hospital on map after filling</u>
+                <span class="fa fa-arrow-right"></span>
+              </small>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email">Hospital Email</label>
+                  <input type="text" name="email" formControlName="email" class="form-control" id="email">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="contact">Contact</label>
+                  <input type="text" name="contact" formControlName="contact" class="form-control" id="contact">
+                </div>
+              </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="(submitAttempt) && (myform.invalid)">
+              {{msg}}
+            </div>
+            <hr>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block" [disabled]="myform.value == myFormDup">
+                Submit
+              </button>
+            </div>
+          </form>
+          <pre>{{myform.value | json }}</pre>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 col-xs-12">
+      <div class="row">
+        <h3 class="text-center"> Find hospital</h3>
+        <div class="col-xs-12">
+          <button (click)="setMapType('roadmap')" class="btn btn-primary">Road map</button>
+          <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+        </div>
+      </div>
+      <div class="row map">
+        <div id="floating-panel">
+          <input id="address" type="textbox" [(ngModel)]="address" placeholder="Enter accurate location">
+          <input id="submit" type="button" (click)="geocode()" value="Geocode">
+          <button class="btn btn-primary" (click)="findMe()">Find me</button>
+        </div>
+        <div class="col-md-12">
+          <div id="map" #gmap></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

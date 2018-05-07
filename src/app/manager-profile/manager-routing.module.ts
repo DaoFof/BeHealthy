@@ -7,6 +7,8 @@ import { MydoctorsComponent } from '../patient-profile/mydoctors/mydoctors.compo
 import { MyhospitalsComponent } from '../patient-profile/myhospitals/myhospitals.component';
 import {NewHospitalComponent} from './new-hospital/new-hospital.component';
 import { FillProfileComponent } from './fill-profile/fill-profile.component';
+import { EditHospitalComponent } from './edit-hospital/edit-hospital.component';
+
 import { AuthGuard } from '../auth-guard.service';
 
 const managerProfileRoutes: Routes = [
@@ -28,6 +30,9 @@ const managerProfileRoutes: Routes = [
           },{
             path:'newhospital',
             component: NewHospitalComponent
+          },{
+            path:'edithospital/:id',
+            component: EditHospitalComponent,
           },{
             path: '',
             redirectTo: '/managerProfile/myhospitals',

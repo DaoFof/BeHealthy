@@ -46,8 +46,9 @@ export class MyhospitalsComponent implements OnInit {
       });
   }
   sendtoHospitaldetail(id){
-    this.router.navigate([`../../hospital/${id}`], {relativeTo: this.r} )
-    console.log(id);
-    
+    this.router.navigate([`../../hospital/${id}`], {relativeTo: this.r}) 
+  }
+  editPage(id){
+    this.router.navigate([`../edithospital/${id}`], { relativeTo: this.r }) 
   }
 }

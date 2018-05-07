@@ -65,7 +65,11 @@ export class GoogleMapService {
   private markerHandler(marker: google.maps.Marker) {
     alert('Marker\'s Title: ' + marker.getTitle());
   }*/
-
+  mark(lat, lng){
+    let location = new google.maps.LatLng(lat, lng);
+    this.map.panTo(location);
+    this.putMarker(location);
+  }
   //geocoder part
   async geocode(address){
     this.geocoder = new google.maps.Geocoder();
