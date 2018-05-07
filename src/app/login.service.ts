@@ -10,20 +10,23 @@ export class LoginService {
   herokuApiRoot: string = "https://shrouded-wildwood-20663.herokuapp.com"
   localApi: string = "http://localhost:3000";
   adress = this.localApi;
-
-  loginPOST(url, data):Promise<any>{
+private getToken(){
+  var token = localStorage.getItem('token');
+  let headers = new HttpHeaders(
+    { 'x-auth': token }
+  );
+  return headers;
+}
+  private loginPOST(url, data):Promise<any>{
     return this.http
       .post(url, data,{observe: 'response'})
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError)
   }
-  logoutPOST(url):Promise<any>{
-    var token = localStorage.getItem('token');
+  private logoutPOST(url):Promise<any>{
+    let headers = this.getToken();
     localStorage.removeItem('token');
-    let headers = new HttpHeaders(
-      {'x-auth':token}
-    );
     return this.http
       .delete(url,{headers})
       .toPromise()
@@ -42,6 +45,15 @@ export class LoginService {
     return error;
   }
 
+  private getMe(url){
+    let headers = this.getToken();
+    return this.http
+      .get(url, {headers, observe: 'response'})
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
   login(data){
     let url = `${this.adress}/users/login`
     return this.loginPOST(url, data);
@@ -49,5 +61,9 @@ export class LoginService {
   logout(){
     let url = `${this.adress}/users/me/token`
     return this.logoutPOST(url);
+  }
+  getUser(){
+    let url = `${this.adress}/users/me`;
+    return this.getMe(url)
   }
 }

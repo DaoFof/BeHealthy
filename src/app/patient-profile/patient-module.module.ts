@@ -10,12 +10,14 @@ import { MyconsultationsComponent } from './myconsultations/myconsultations.comp
 import {ShareComponentModule} from '../share-component/share-component.module';
 import {PatientRoutingModule} from './patient-routing.module';
 
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   imports: [
     CommonModule,
     ShareComponentModule,
-    PatientRoutingModule
+    PatientRoutingModule,
+    NgxPaginationModule
   ],
   declarations: [
     PatientProfileComponent,
