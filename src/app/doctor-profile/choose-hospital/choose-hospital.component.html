@@ -1,0 +1,82 @@
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-2 col-xs-8">
+      <div class="header">
+        <h2 class="title text-center">
+          Register to a hospital
+        </h2>
+        <hr>
+        <h4 class="body text-center">
+          As a Doctor, Registering to a hospital ensure the site admin that you are a part of that organization and make them responsible
+          for you, allow you to exerce and make confident patient
+          <small class="row text-danger">
+            <b>This part is compulsory</b>
+          </small>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="body">
+        <form action="" [formGroup]="myform" (ngSubmit)="onSubmit(template)">
+          <div class="form-group">
+            <ng-multiselect-dropdown 
+              [placeholder]="'Select Hospital'" 
+              [data]="hospitals"
+              formControlName="hospitalControl"
+              [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" 
+              (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <button class="btn btn-primary btn-block" [disabled]="hospitalControl.value.length<1">
+            Submit
+          </button>
+        </form>
+        <pre>{{hospitalControl.value| json}}</pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="body">
+        <ul>
+          <li>Manager id: {{managerId}} </li>
+          <li>Name: {{name}}</li>
+          <li>Country: {{country}}</li>
+          <li>City:{{city}}</li>
+          <li>Email: {{email}}</li>
+        </ul>
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="map" #gmap></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <div class="row">
+      <div class="title col-md-12">
+        <h1>
+           Congratulation
+        </h1>
+      </div>
+      <div class="body col-md-12">
+        You have registered to 
+        <ul>
+          <li *ngFor="let hospital of hospitalControl.value"><b>
+            {{hospital.name}}
+          </b></li>
+        </ul>
+        <small class="text-info">Your account will be activated when Hospital Manager will validate your belonging</small>
+      </div>
+      <div class="footer col-md-offset-3 col-md-6 text-center">
+        <button type="button" class="btn btn-primary btn-block" (click)="goToHome()">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</ng-template>

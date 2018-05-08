@@ -43,7 +43,8 @@ const managerProfileRoutes: Routes = [
     ]
   },{
     path: 'fillprofile',
-    component: FillProfileComponent
+    component: FillProfileComponent,
+    canActivate: [AuthGuard],
   }
 ]
 @NgModule({

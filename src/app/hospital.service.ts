@@ -21,7 +21,11 @@ export class HospitalService {
     let headers = this.getToken();
     return this.http.post(url, data, {headers, observe: 'response' });
   }
-  private getall(url){
+  private getAll(url: string){
+    let headers = this.getToken();
+    return this.http.get(url, { headers, observe: 'response' });
+  }
+  private getallManagerHospital(url){
     let headers = this.getToken();
     return this.http.get(url, {headers, observe: 'response' });
   }
@@ -39,6 +43,12 @@ export class HospitalService {
     return this.http.patch(url, data, { headers, observe: 'response' });
   }
 
+  private updateDoctorHospital(url, data) {
+    let headers = this.getToken();
+    console.log(data);
+    return this.http.patch(url, data, { headers, observe: 'response' });
+  }
+
   newHospital(data) {
     let url = `${this.adress}/hospital`;
     return this.post(url, data);
@@ -51,7 +61,7 @@ export class HospitalService {
 
   listManagerHospital(){
     let url = `${this.adress}/managerHospital`;
-    return this.getall(url);
+    return this.getallManagerHospital(url);
   }
 
   deleteHospital(id){
@@ -62,5 +72,15 @@ export class HospitalService {
   getHospital(id: string) {
     let url = `${this.adress}/hospital/${id}`;
     return this.getOne(url);
+  }
+
+  listAllHospital(){
+    let url = `${this.adress}/hospital`;
+    return this.getAll(url); 
+  }
+
+  doctorAddHospital(data){
+    let url = `${this.adress}/addDoctorHospital`;
+    return this.updateDoctorHospital(url,data)
   }
 }

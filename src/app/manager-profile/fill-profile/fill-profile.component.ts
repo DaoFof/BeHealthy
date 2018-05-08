@@ -95,7 +95,7 @@ export class FillProfileComponent implements OnInit {
           if (this.responseBody.userType == 'Hospital Manager')this.router.navigate(['managerProfile'])
           else if (this.responseBody.userType == 'Patient') this.router.navigate(['patientProfile'])
           else
-            this.router.navigate(['doctorProfile'])
+            this.router.navigate(['chooseHospital'])
         }
       });
   }

@@ -11,6 +11,7 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {DoctorsRouteModule } from './doctors/doctors.module';
 import {HospitalsRouteModule} from './hospitals/hospitals-route.module';
 import {PatientProfileModule} from './patient-profile/patient-module.module'
+import { DoctorModule } from './doctor-profile/doctor.module';
 import {ManagerModuleModule} from './manager-profile/manager-module.module'
 import {LoginRoutingModule} from './login/login-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -48,6 +49,7 @@ import { LoginService } from './login.service';
     DoctorsRouteModule,
     PatientProfileModule,
     ManagerModuleModule,
+    DoctorModule,
     LoginRoutingModule,
     BootstrapTwitterModule,
     AppRoutingModule
