@@ -7,7 +7,7 @@ const doctorProfileRoutes: Routes = [
   {
     path: 'chooseHospital',
     component: ChooseHospitalComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   }
 ]
 

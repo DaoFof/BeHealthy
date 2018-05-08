@@ -103,7 +103,16 @@ export class ChooseHospitalComponent implements OnInit {
     });
   }
   onSubmit(template) {
-    this.hospitalService.doctorAddHospital(this.hospitalControl.value)
+    var toSend = [];
+    for (const item of this.hospitalControl.value) {
+      for (const hospital of this.hospitals) {
+        if (item._id == hospital._id) {
+          item.managerId = hospital.managerId;
+          toSend.push(item);
+        }
+      }
+    }
+    this.hospitalService.doctorAddHospital(toSend)
       .subscribe(res=>{
         //console.log(res);
         if (res.status == 200) {

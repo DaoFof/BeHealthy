@@ -20,6 +20,7 @@ import {RegistrationService} from '../registration.service';
 import { FileUploadService } from '../file-upload.service';
 import { HospitalService } from '../hospital.service';
 import { DepartementService } from '../departement.service';
+import { DoctorRegistrationComponent } from './doctor-registration/doctor-registration.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { DepartementService } from '../departement.service';
     ManagerProfileComponent,
     NewHospitalComponent,
     FillProfileComponent,
-    EditHospitalComponent
+    EditHospitalComponent,
+    DoctorRegistrationComponent
   ], providers: [GoogleMapService,
      RegistrationService, 
      FileUploadService, 
