@@ -21,7 +21,7 @@ import { FileUploadService } from '../file-upload.service';
 import { HospitalService } from '../hospital.service';
 import { DepartementService } from '../departement.service';
 import { DoctorRegistrationComponent } from './doctor-registration/doctor-registration.component';
-
+import { ManagerService } from '../manager.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -44,6 +44,8 @@ import { DoctorRegistrationComponent } from './doctor-registration/doctor-regist
      RegistrationService, 
      FileUploadService, 
      HospitalService,
-    DepartementService]
+    DepartementService,
+    ManagerService
+  ]
 })
 export class ManagerModuleModule { }

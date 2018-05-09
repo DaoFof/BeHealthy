@@ -7,6 +7,7 @@ import { LoginService } from '../../login.service';
 })
 export class ManagerProfileComponent implements OnInit {
   isCollapsed = true;
+  notificationLength = 0;
   constructor( private loginService: LoginService) { }
   user ;
   ngOnInit() {
@@ -16,6 +17,7 @@ export class ManagerProfileComponent implements OnInit {
   async getUserInfo (){
     let res= await this.loginService.getUser();
     this.user = res['body'];
-    console.log(this.user);
+    this.notificationLength += this.user.manager.doctorRequest.length;
+    console.log(this.user.manager.doctorRequest.length);
   }
 }

@@ -108,6 +108,7 @@ export class ChooseHospitalComponent implements OnInit {
       for (const hospital of this.hospitals) {
         if (item._id == hospital._id) {
           item.managerId = hospital.managerId;
+          item.hospitalName = hospital.name
           toSend.push(item);
         }
       }

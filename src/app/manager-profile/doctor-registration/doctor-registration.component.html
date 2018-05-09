@@ -1,3 +1,60 @@
-<p>
-  doctor-registration works!
-</p>
+<div class="container">
+
+  <!-- Projects Row -->
+  <div *ngIf="requests.length > 0; else elseBlock">
+    <div class="row"[@requests]="requests.length">
+      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item" *ngFor="let request of requests; let i = index">
+        <div class="card h-100">
+          <a href="#">
+            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+          </a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a >{{request.firstName}} , {{request.lastName}}</a>
+            </h4>
+            <p class="btn btn-info btn-xs" routerLink='/doctor/{{request.doctorId}}'>See More
+              <span class="fa fa-caret-right"></span>
+            </p>
+            <h5>{{request.email}}</h5>
+            <h5>Requested to : {{request.hospitalName}}</h5>
+            <span class="row">
+              <p class="col-md-5">Expertise</p>
+              <div class="rating col-md-7">
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+              </div>
+              <p class="col-md-12">300 notes by patients</p>
+            </span>
+            <br>
+            <div class="row">
+              <div class="col-xs-6">
+                <p class="btn btn-primary btn-block" (click)="accept(request._id, i)">Accept
+                  <span class="fa fa-user-plus"></span>
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <p class="btn btn-danger btn-block" (click)="deny(request._id, i)">Deny
+                  <span class="fa fa-trash"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="row">
+      <div class="col-xs-offset-3 col-xs-6">
+        <h1 class="text-center">
+          No actual request
+        </h1>
+      </div>
+    </div>
+  </ng-template>
+  <!-- /.row -->
+  <hr>
+</div>

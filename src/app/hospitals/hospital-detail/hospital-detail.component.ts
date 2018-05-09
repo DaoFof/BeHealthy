@@ -29,13 +29,7 @@ export class HospitalDetailComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-   /* this.hospital = this.route.paramMap
-      .switchMap((params: ParamMap)=>
-        this.hospitalsService.getHospital(params.get('id'))
-      )
-      console.log(this.hospital);*/
       this.getHospital();
-      
   }
   async getHospital(){
     const id = this.route.snapshot.paramMap.get('id');
