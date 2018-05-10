@@ -11,6 +11,8 @@ import { ChooseHospitalComponent } from './choose-hospital/choose-hospital.compo
 
 import { GoogleMapService } from '../google-map.service';
 import { AuthService } from '../auth.service';
+import { LoginService } from '../login.service';
+import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 
 @NgModule({
   imports: [
@@ -21,10 +23,11 @@ import { AuthService } from '../auth.service';
     NgMultiSelectDropDownModule.forRoot(),
     DoctorRoutingModule
   ],
-  declarations: [ChooseHospitalComponent],
+  declarations: [ChooseHospitalComponent, ProfileLayoutComponent],
   providers:[
     GoogleMapService,
-    AuthService
+    AuthService,
+    LoginService
   ]
 })
 export class DoctorModule { }
