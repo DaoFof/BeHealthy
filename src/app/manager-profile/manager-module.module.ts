@@ -4,15 +4,15 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 import {ManagerProfileComponent} from './manager-profile/manager-profile.component';
-import { MydoctorsComponent } from '../patient-profile/mydoctors/mydoctors.component';
-import { MyhospitalsComponent } from '../patient-profile/myhospitals/myhospitals.component';
+import { MydoctorsComponent } from './mydoctors/mydoctors.component';
+import { MyhospitalsComponent } from './myhospitals/myhospitals.component';
 import { NewHospitalComponent } from './new-hospital/new-hospital.component';
 import { EditHospitalComponent } from './edit-hospital/edit-hospital.component';
 
 import {ManagerRoutingModule} from './manager-routing.module';
-import {ShareComponentModule} from '../share-component/share-component.module';
 import { FillProfileComponent } from './fill-profile/fill-profile.component';
 
 import {GoogleMapService} from '../google-map.service';
@@ -22,24 +22,28 @@ import { HospitalService } from '../hospital.service';
 import { DepartementService } from '../departement.service';
 import { DoctorRegistrationComponent } from './doctor-registration/doctor-registration.component';
 import { ManagerService } from '../manager.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   imports: [
     CommonModule,
-    ShareComponentModule,
     ManagerRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCHQyx6ONu1Djj6FXR_G-NPcNbh-eYK9tA' //map  key
     }),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxPaginationModule
   ],
   declarations: [
     ManagerProfileComponent,
     NewHospitalComponent,
     FillProfileComponent,
+    MydoctorsComponent,
+    MyhospitalsComponent,
     EditHospitalComponent,
-    DoctorRegistrationComponent
+    DoctorRegistrationComponent,
+    DashboardComponent
   ], providers: [GoogleMapService,
      RegistrationService, 
      FileUploadService, 
