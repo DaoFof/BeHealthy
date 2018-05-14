@@ -1,0 +1,22 @@
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="container">
+  <div class="row">
+    
+    
+    <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+    <button (click)="sendMessage()">Send</button>
+    <div *ngFor="let message of messages">
+      {{message}}
+    </div>
+  </div>
+  <simple-notifications [options]="options"></simple-notifications>
+</div>

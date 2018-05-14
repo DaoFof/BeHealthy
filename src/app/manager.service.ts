@@ -12,8 +12,10 @@ export class ManagerService {
   adress = this.localApi;
   private getToken() {
     var token = localStorage.getItem('token');
-    return new HttpHeaders(
-      { 'x-auth': token }
+    return new HttpHeaders({
+      'x-auth': token,
+      "myNg": "fromAngularApp"
+    }
     );
   }
   private getAllDoctorRequest(url: string){
@@ -22,16 +24,16 @@ export class ManagerService {
   }
 
   retrieveDoctorRequest(){
-    let url = `${this.adress}/manager`;
+    let url = `/manager`;
     return this.getAllDoctorRequest(url);
   }
   acceptRequest(id){
-    let url = `${this.adress}/acceptDoctorRequest`;
+    let url = `/acceptDoctorRequest`;
     let headers = this.getToken();
     return this.http.patch(url, {id},{ headers, observe: 'response' });
   }
   denyRequest(id) {
-    let url = `${this.adress}/denyDoctorRequest`;
+    let url = `/denyDoctorRequest`;
     let headers = this.getToken();
     return this.http.patch(url, { id }, { headers, observe: 'response' });
   }

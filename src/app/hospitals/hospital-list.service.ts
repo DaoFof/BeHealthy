@@ -12,8 +12,10 @@ export class HospitalListService {
   adress = this.localApi;
   hospitals = null;
   hospitalGET(url:string){
-    let headers = new HttpHeaders(
-      {'x-auth':'the value'}
+    let headers = new HttpHeaders({
+      'x-auth': 'the value',
+      "myNg": "fromAngularApp"
+    }
     );
     console.log(headers);
     
@@ -29,15 +31,15 @@ export class HospitalListService {
 }
   //in case of contineoRoot : hospitals?id=
   getHospitals(){
-    let url = `${this.adress}/hospital`;
+    let url = `/hospital`;
     return this.hospitalGET(url);
   }
   getHospital(id: string){
-    let url = `${this.adress}/hospital/${id}`; 
+    let url = `/hospital/${id}`; 
     return this.hospitalGET(url);
   }
   getMyHospitals(patientId: string){
-    let url = `${this.adress}/patientHospital/${patientId}`; 
+    let url = `/patientHospital/${patientId}`; 
     return this.hospitalGET(url);
   }
 }

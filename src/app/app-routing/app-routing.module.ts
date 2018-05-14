@@ -8,11 +8,13 @@ import { RegistrationComponent } from '../registration/registration.component';
 import { InformationsComponent } from '../informations/informations.component';
 import { LoginComponent } from '../login/login.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { SocketTestComponent } from '../socket-test/socket-test.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent },
   {path: 'about', component: AboutComponent},
   {path: 'registration', component: RegistrationComponent},
+  { path: 'socketTest', component: SocketTestComponent},
   {path: 'news', component: InformationsComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

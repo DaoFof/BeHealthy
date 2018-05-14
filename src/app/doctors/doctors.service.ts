@@ -12,8 +12,10 @@ export class DoctorsService {
   localApi: string = "http://localhost:3000";
   adress = this.localApi;
   doctorGET(url:string){
-    let headers = new HttpHeaders(
-      {'x-auth':'the value'}
+    let headers = new HttpHeaders({
+      'x-auth': 'the value',
+      "myNg": "fromAngularApp"
+    }
     );
     return this.http.get(url,{headers}).toPromise().then(
       res =>{
@@ -25,15 +27,15 @@ export class DoctorsService {
     );
   }
   getDoctors(){
-    let url = `${this.adress}/doctor`;
+    let url = `/doctor`;
     return this.doctorGET(url);
   }
   getDoctor(id){
-    let url = `${this.adress}/doctor/${id}`;
+    let url = `/doctor/${id}`;
     return this.doctorGET(url)
   }
   getMyDoctors(patientId: string){
-    let url = `${this.adress}/patientDoctor/${patientId}`;
+    let url = `/patientDoctor/${patientId}`;
     return this.doctorGET(url)
   }
 }

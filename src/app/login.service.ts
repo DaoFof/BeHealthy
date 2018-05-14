@@ -12,12 +12,15 @@ export class LoginService {
   adress = this.localApi;
 private getToken(){
   var token = localStorage.getItem('token');
-  let headers = new HttpHeaders(
-    { 'x-auth': token }
+  let headers = new HttpHeaders({
+    'x-auth': token,
+    "myNg": "fromAngularApp"
+    }
   );
   return headers;
 }
   private loginPOST(url, data):Promise<any>{
+    var headers = this.getToken();
     return this.http
       .post(url, data,{observe: 'response'})
       .toPromise()
@@ -55,15 +58,15 @@ private getToken(){
   }
 
   login(data){
-    let url = `${this.adress}/users/login`
+    let url = `/users/login`
     return this.loginPOST(url, data);
   }
   logout(){
-    let url = `${this.adress}/users/me/token`
+    let url = `/users/me/token`
     return this.logoutPOST(url);
   }
   getUser(){
-    let url = `${this.adress}/users/me`;
+    let url = `/users/me`;
     return this.getMe(url)
   }
 }

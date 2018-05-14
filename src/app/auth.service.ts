@@ -6,7 +6,7 @@ import {LoginService} from './login.service';
 export class AuthService {
   constructor(private loginService : LoginService){ }
   responseBody;
-  headers;
+  token;
   isLoggedIn = false;
   
   // store the URL so we can redirect after logging in
@@ -17,12 +17,10 @@ export class AuthService {
     console.log(resp);
     if(resp.status==200){
       this.isLoggedIn = true;
-      const keys = resp.headers.keys();
-          this.headers = keys.map(key=>
-          JSON.parse(`{\"${key}\": \"${resp.headers.get(key)}\"}`));  
-          localStorage.setItem('token', this.headers[1]['x-auth']);
-          this.responseBody = resp.body;
-          return Promise.resolve(resp.body['userType']);
+      this.token = resp.headers.get('x-auth');
+      localStorage.setItem('token', this.token);
+      this.responseBody = resp.body;
+      return Promise.resolve(resp.body['userType']);
     }else{
       return Promise.reject;
     }

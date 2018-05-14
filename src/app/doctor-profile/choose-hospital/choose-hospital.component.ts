@@ -95,7 +95,7 @@ export class ChooseHospitalComponent implements OnInit {
   myform: FormGroup;
   hospitalControl: FormControl;
   createFormControls() {
-    this.hospitalControl = new FormControl('')
+    this.hospitalControl = new FormControl([])
   }
   createForm() {
     this.myform = new FormGroup({

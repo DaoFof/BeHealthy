@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { LoginService } from '../../login.service';
+import { HospitalService } from '../../hospital.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,7 @@ import { LoginService } from '../../login.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private http: HttpClient, private hospitalService: HospitalService, private loginService: LoginService) { }
   user;
   lat;
   lng;
@@ -17,8 +18,10 @@ export class DashboardComponent implements OnInit {
   doctors ;
   doctorReq;
   notificationLength = 0;
+  hospitalsLength;
   ngOnInit() {
     this.getUserInfo();
+    this.getHospitals();
   }
 
   async getUserInfo() {
@@ -37,5 +40,11 @@ export class DashboardComponent implements OnInit {
         this.temp = parseInt(res['main']['temp'], 10);
         this.desc = res['weather'][0]['description'];
       })
+  }
+  getHospitals() {
+    this.hospitalService.listManagerHospital()
+      .subscribe(res => {
+        this.hospitalsLength = res.body['hospital'].length;
+      });
   }
 }

@@ -11,10 +11,12 @@ export class DepartementService {
   localApi: string = "http://localhost:3000";
   adress = this.localApi;
   getDepartements(){
-    let url = `${this.adress}/departement`;
+    let url = `/departement`;
     var token = localStorage.getItem('token');
-    let headers = new HttpHeaders(
-      { 'x-auth': token }
+    let headers = new HttpHeaders({
+      'x-auth': token,
+      "myNg": "fromAngularApp"
+    }
     );
     return this.http.get(url, { headers, observe: 'response' });
   }

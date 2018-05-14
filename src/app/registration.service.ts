@@ -17,17 +17,20 @@ export class RegistrationService {
   updatePATCH(url:string, data: any){
     var token = localStorage.getItem('token');
     let headers = new HttpHeaders(
-      {'x-auth':token}
+      {
+        'x-auth':token,
+        "myNg": "fromAngularApp"
+      }
     );
     return this.http.patch(url, data, {headers, observe:'response'});
   }
 
   registrer(data){
-    let url = `${this.adress}/users`;
+    let url = `/users`;
     return this.registrerPOST(url, data);
   }
   updateInfo(data){
-    let url = `${this.adress}/user`;
+    let url = `/user`;
     var res =  this.updatePATCH(url, data);
     console.log(res);
     return res;

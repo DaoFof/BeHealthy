@@ -13,8 +13,10 @@ export class HospitalService {
   adress = this.localApi;
   private getToken(){
     var token = localStorage.getItem('token');
-    return new HttpHeaders(
-      { 'x-auth': token }
+    return new HttpHeaders({
+      'x-auth': token,
+      "myNg": "fromAngularApp"
+    }
     );
   }
   private post(url: string, data) {
@@ -50,37 +52,37 @@ export class HospitalService {
   }
 
   newHospital(data) {
-    let url = `${this.adress}/hospital`;
+    let url = `/hospital`;
     return this.post(url, data);
   }
 
   updateHospital(id,data){
-    let url = `${this.adress}/hospital/${id}`;
+    let url = `/hospital/${id}`;
     return this.update(url, data);
   }
 
   listManagerHospital(){
-    let url = `${this.adress}/managerHospital`;
+    let url = `/managerHospital`;
     return this.getallManagerHospital(url);
   }
 
   deleteHospital(id){
-    let url = `${this.adress}/hospital/${id}`;
+    let url = `/hospital/${id}`;
     return this.delete(url);
   }
   
   getHospital(id: string) {
-    let url = `${this.adress}/hospital/${id}`;
+    let url = `/hospital/${id}`;
     return this.getOne(url);
   }
 
   listAllHospital(){
-    let url = `${this.adress}/hospital`;
+    let url = `/hospital`;
     return this.getAll(url); 
   }
 
   doctorAddHospital(data){
-    let url = `${this.adress}/addDoctorHospital`;
+    let url = `/addDoctorHospital`;
     return this.updateDoctorHospital(url,data)
   }
 }

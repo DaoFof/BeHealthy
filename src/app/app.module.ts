@@ -26,7 +26,9 @@ import { AuthGuard} from './auth-guard.service';
 import {AuthService} from './auth.service';
 import { LoginService } from './login.service';
 //import { PatientProfileComponent } from './patient-profile/patient-profile.component';
-
+import { SocketTestService } from './socket-test.service';
+import { SocketTestComponent } from './socket-test/socket-test.component';
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,14 @@ import { LoginService } from './login.service';
     PageNotFoundComponent,
     HeaderComponent,
     LoginComponent,
+    SocketTestComponent,
     //PatientProfileComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    SimpleNotificationsModule.forRoot(),
     ReactiveFormsModule,
     HospitalsRouteModule,
     DoctorsRouteModule,
@@ -54,7 +58,7 @@ import { LoginService } from './login.service';
     BootstrapTwitterModule,
     AppRoutingModule
   ],
-  providers: [RegistrationService, LoginService],
+  providers: [RegistrationService, LoginService, SocketTestService, NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -12,8 +12,10 @@ export class FileUploadService {
   adress = this.localApi;
   uploadAPI(url, input){
     var token = localStorage.getItem('token');
-    let headers = new HttpHeaders(
-      { 'x-auth': token }
+    let headers = new HttpHeaders({
+      'x-auth': token,
+      "myNg": "fromAngularApp"
+    }
     );
     return this.http
             .post(url, input, { headers, observe: 'response'})
@@ -29,7 +31,7 @@ export class FileUploadService {
     return error;
   }
   upload(fileToUpload: any){
-    let input = new FormData(), url = `${this.adress}/uploadFile`;
+    let input = new FormData(), url = `/uploadFile`;
     input.append("file", fileToUpload);
     return this.uploadAPI(url, input);
   }
