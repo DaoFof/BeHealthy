@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <!-- Projects Row -->
+    <div *ngIf="doctors.length > 0; else elseBlock">
+      <div class="row">
+        <h3 class="text-center">
+          Click on the hospital name to request to it
+        </h3>
+        <div class=" col-md-4 portfolio-item" *ngFor="let doctor of doctors  | paginate: { itemsPerPage: 3, currentPage: p }">
+          <div class="card h-100">
+            <a href="#">
+              <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">{{doctor.firstName}} {{doctor.lastName}}</a>
+              </h4>
+              <ul>
+                <li *ngFor = "let hospital of doctor.doctor.hospitals">
+                  <a routerLink='../scheduler/{{doctor._id}}/{{hospital.hospitalId}}' > {{hospital.name}} </a>
+                </li>
+              </ul>
+              <span class="row">
+                <p class="col-md-6">Expertise</p>
+                <div class="rating col-md-6">
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                </div>
+                <p class="col-md-12">300 notes by patients</p>
+              </span>
+              <br>
+              <p class="btn btn-info btn-md" routerLink='/doctor/{{doctor._id}}'>Doc Profile
+                <span class="fa fa-caret-right"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="row">
+        <h4>
+          Nothing found
+        </h4>
+      </div>
+    </ng-template>
+    <!-- /.row -->
+    <hr>
+</div>

@@ -8,16 +8,19 @@ import { MyrecordsComponent } from './myrecords/myrecords.component';
 import { MyhospitalsComponent } from './myhospitals/myhospitals.component';
 import { MyprescriptionsComponent } from './myprescriptions/myprescriptions.component';
 import { MyconsultationsComponent } from './myconsultations/myconsultations.component';
+import { RequestAppointmentComponent } from './appointments/request/request.component';
+import { AppointmentsComponent } from './appointments/lists/lists.component';
+import { AppointmentSchedulerComponent } from './appointments/scheduler/scheduler.component';
 
 const patientProfileRoutes: Routes = [
   {
     path: 'patientProfile',
     component: PatientProfileComponent,
-    canActivate:[AuthGuard],
+    //canActivate:[AuthGuard],
     children: [
       {
        path:'',
-       canActivateChild: [AuthGuard],
+       //canActivateChild: [AuthGuard],
        children:[
         {
           path: 'mydoctors',
@@ -32,8 +35,34 @@ const patientProfileRoutes: Routes = [
           path: 'myprescriptions',
           component: MyprescriptionsComponent
         },{
-          path: 'myconsultations',
+          path: 'mydiagnoses',
           component: MyconsultationsComponent
+        },{
+          path: 'appointments',
+          children:[
+          {
+            path: 'request',
+            component: RequestAppointmentComponent
+          },{
+            path: 'list',
+            component: AppointmentsComponent
+          },{
+              path: 'scheduler/:docId/:hosId',
+              component: AppointmentSchedulerComponent
+          },{
+            path: 'scheduler',
+            redirectTo: '/patientProfile/appointments/list',
+            pathMatch: 'full'
+          },{
+            path: 'scheduler/:rererr',
+            redirectTo: '/patientProfile/appointments/list',
+            pathMatch: 'full'
+          },{
+            path: '',
+            redirectTo: '/patientProfile/appointments/list',
+            pathMatch: 'full'
+          }
+          ]
         },{
           path: '',
           redirectTo: '/patientProfile/myhospitals',

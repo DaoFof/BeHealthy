@@ -70,7 +70,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
 var hospitalRoutes =  require('./routes/hospitalroutes');
 hospitalRoutes(app);
 
-const doctorRoutes =  require('./routes/doctorroutes'), 
+const //doctorRoutes =  require('./routes/doctorroutes'), 
     departementRoutes =  require('./routes/hdepartementroutes');
     patientRoutes =  require('./routes/patientroutes'),
     diagnoseRoutes =  require('./routes/diagnoseroutes'),

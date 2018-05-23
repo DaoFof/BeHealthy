@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <h3 class="text-center">
+    Appointment Details
+  </h3>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-3 portfolio-item">
+      <div class="card h-100">
+        <a href="#">
+          <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+        </a>
+        <div class="card-body">
+          <h4 class="card-title">
+            <a href="#">{{doctor.firstName}} {{doctor.lastName}}</a>
+          </h4>
+          <span class="row">
+            <p class="col-md-6">Expertise</p>
+            <div class="rating col-md-6">
+              <span>☆</span>
+              <span>☆</span>
+              <span>☆</span>
+              <span>☆</span>
+              <span>☆</span>
+            </div>
+            <p class="col-md-12">300 notes by patients</p>
+          </span>
+          <br>
+          <p class="btn btn-info btn-md" routerLink='/doctor/{{doctor._id}}'>See More
+            <span class="fa fa-caret-right"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <hr>
+      <form [formGroup]="myform" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <div class="input-group" [owlDateTimeTrigger]="dt11">
+            <span class="input-group-addon" id="basic-addon1">
+              <span class="fa fa-calendar"></span>
+            </span>
+            <input class="form-control" formControlName="date" [min]="min" [owlDateTime]="dt11" name="date">
+          </div>
+          <owl-date-time [pickerMode]="'dialog'" #dt11></owl-date-time>
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="remark">
+            Remark or Description
+          </label>
+          <textarea name="remark" class="form-control" formControlName="remark" id="" rows="5" placeholder="Be short ..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="urgence">
+            Status
+          </label>
+          <select name="urgence" id="urgence" class="form-control" formControlName="status">
+            <option value="hurry">Hurry</option>
+            <option value="moderate">Moderate</option>
+            <option value="not-hurry">Time is there</option>
+          </select>
+        </div>
+        <hr>
+        <button class="btn btn-primary btn-block" [disabled]="myform.invalid"> Saves</button>
+      </form>
+      <pre>{{myform.value | json }}</pre>
+    </div>
+  </div>
+</div>

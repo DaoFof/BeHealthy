@@ -108,6 +108,11 @@ UserSchema.methods.toJSON = function () {
     specialManagerAdd.forEach(element => {
       toSend.push(element);
     });
+  }else if(user.userType == 'Doctor'){
+    var specialDoctorAdd = ['doctor.hospitals']
+    specialDoctorAdd.forEach(element =>{
+      toSend.push(element);
+    })
   }
   console.log(toSend);
   

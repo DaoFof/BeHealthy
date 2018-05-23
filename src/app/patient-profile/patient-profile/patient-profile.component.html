@@ -20,10 +20,10 @@
           </li>
           <li>
               <a href="#">About</a>
-              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Appointment</a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
-                  <li><a href="#">Page 1</a></li>
-                  <li><a href="#">Page 2</a></li>
+                  <li><a routerLink='appointments/request' >Request an Appointment</a></li>
+                  <li><a routerLink='appointments/list'>Appointments</a></li>
                   <li><a href="#">Page 3</a></li>
               </ul>
           </li>
@@ -56,10 +56,10 @@
 
               <div class="" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
+                    <li routerLink='dashboard' routerLinkActive="activated"><a>Dashboard</a></li>
                     <li routerLink='myhospitals' routerLinkActive ="activated"><a >Hospitals</a></li>
                     <li routerLink='mydoctors' routerLinkActive ="activated" ><a >Doctors</a></li>
-                    <li routerLink='myrecords' routerLinkActive ="activated"><a >Records</a></li>
-                    <li routerLink='myconsultations' routerLinkActive ="activated"><a >Consultations</a></li>
+                    <li routerLink='mydiagnoses' routerLinkActive ="activated"><a >Diagnoses</a></li>
                     <li routerLink='myprescriptions' routerLinkActive ="activated"><a >Prescriptions</a></li>
                   </ul>
               </div>

@@ -22,7 +22,7 @@ export class SocketTestComponent implements OnInit {
       this.socketTest.getMessages();
   }
   public options = {
-    position: ["top", "right"],
+    position: ["bottom", "right"],
     animate: "fromRight"
   }
   sendMessage() {

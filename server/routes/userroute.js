@@ -35,21 +35,58 @@ app.post('/users', async (req, res) => {
       res.status(400).send(e);
     }
   });
- async function getElement(userType, res){
+  // GET BY ID 
+  app.get('/user/:id', /*authenticate,*/ async (req, res) => {
     try {
-      const users = await User.find({userType});
-      res.send({users});
+      var id = req.params.id;
+      if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+      }
+      const doctor = await User.findOne({
+        _id: id
+      });
+      console.log(id);
+      if (!doctor) {
+        return res.status(404).send({ doctor: 'Nothing found' });
+      }
+      res.send({ doctor });
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  });
+  //GET BY TYPE 
+  async function getElement(userType, res) {
+    try {
+      const users = await User.find({ userType });
+      res.send({ users });
     } catch (e) {
       res.status(400).send(e);
     }
   }
-  //GET BY TYPE 
+  async function getOneElement(userType, _id, res) {
+    try {
+      const users = await User.findOne({ userType, _id});
+      res.send({ users });
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  }
   app.get('/patient',/*authenticate,*/ (req, res)=>{
     getElement("Patient", res);
   });
   app.get('/doctor',/*authenticate,*/async (req, res)=>{
    getElement("Doctor", res);
   });
+
+  app.get('/doctor/:id',/*authenticate,*/async (req, res) => {
+    var id = req.params.id;
+    if (!ObjectID.isValid(id)) {
+      return res.status(404).send();
+    }
+    getOneElement("Doctor",id, res);
+  });
+
   app.get('/manager', authenticate, async (req, res)=>{
     getElement("Hospital Manager", res);
   });
