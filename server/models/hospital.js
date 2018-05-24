@@ -1,71 +1,68 @@
 var mongoose = require('mongoose');
-
+var { appointmentSchema } = require('./happointement');
 var HospitalSchema = new mongoose.Schema({
-managerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
-},
-name:{
-    type: String,
-    required: true,
-    /*unique: true*/
-},
-city:{
-    type: String,
-    required: true,
-},
-country:{
-    type: String,
-    required: true,
-},lat: {
-    type: String,
-    required: false
-},
-lng: {
-    type: String,
-    required: false
-}, 
-contact:{
-    type: String,
-    required:function() {
-        return this.email == "" || this.email == undefined || this.email == null
-    }
-},
-email:{
-    type: String,
-    required: false,
-},
-createdOn:{
-    type: Date,
-    default: Date.now
-},
-createdBy:{
-    type: String,
-    /*require: true,*/
-},
-expertiseRate:{
-    type: Number,
-    /*require: true,*/
-    default: 0
-},
-departments:[{
-    departmentId:{
-        type: String,
+    managerId: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    departmentName:{
+    name:{
         type: String,
-        required: false // MAKE IT TRUE LATER
+        required: true,
+        /*unique: true*/
+    },
+    city:{
+        type: String,
+        required: true,
+    },
+    country:{
+        type: String,
+        required: true,
+    },lat: {
+        type: String,
+        required: false
+    },
+    lng: {
+        type: String,
+        required: false
+    }, 
+    contact:{
+        type: String,
+        required:function() {
+            return this.email == "" || this.email == undefined || this.email == null
+        }
+    },
+    email:{
+        type: String,
+        required: false,
+    },
+    createdOn:{
+        type: Date,
+        default: Date.now
+    },
+    createdBy:{
+        type: String,
+        /*require: true,*/
     },
     expertiseRate:{
         type: Number,
+        /*require: true,*/
         default: 0
-    }
-}],
-/*_creator: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
-}*/
+    },
+    departments:[{
+        departmentId:{
+            type: String,
+            required: true
+        },
+        departmentName:{
+            type: String,
+            required: false // MAKE IT TRUE LATER
+        },
+        expertiseRate:{
+            type: Number,
+            default: 0
+        }
+    }],
+    appointmentRequest : [appointmentSchema]
 });
 
 HospitalSchema.methods.addDepartment = async function (depart){
@@ -83,6 +80,17 @@ HospitalSchema.methods.addDepartment = async function (depart){
     return await hospital.update(update);
 };
 //Add Delete department method later
+
+//appointment method 
+HospitalSchema.methods.newAppointment = async function(details){
+    var hospital = this;
+    var update = {
+        $push:{
+            appointmentRequest: details
+        }
+    }
+    return await hospital.update(update);
+}
 
 var Hospital =  mongoose.model('Hospital', HospitalSchema);
 

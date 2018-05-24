@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AmazingTimePickerService } from 'amazing-time-picker';
 import { UserService } from '../../../user.service';
+import { HospitalService } from '../../../hospital.service';
 @Component({
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
@@ -11,9 +12,10 @@ import { UserService } from '../../../user.service';
 export class AppointmentSchedulerComponent implements OnInit {
 
   constructor(private atp: AmazingTimePickerService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private hospitalService: HospitalService
   ) { }
   
   public invalidMoment = new Date(2018, 1, 11, 9, 30);
@@ -27,12 +29,13 @@ export class AppointmentSchedulerComponent implements OnInit {
     this.createForm();
   }
   /*Get Doctor */
-  hosId ;
-  doctor ;
+  hosId;
+  docId;
+  doctor;
   async getDoctor(){
-    const docId = this.route.snapshot.paramMap.get('docId');
-    this.hosId = this.route.snapshot.paramMap.get('hosId');
-    var res = await this.userService.getDoctorDup(docId);
+    this.docId = this.activatedRoute.snapshot.paramMap.get('docId');
+    this.hosId = this.activatedRoute.snapshot.paramMap.get('hosId');
+    var res = await this.userService.getDoctorDup(this.docId);
     this.doctor = res.body.users;
     console.log(this.doctor);
   }
@@ -72,9 +75,18 @@ export class AppointmentSchedulerComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.myform.value);
-    console.log(new Date(this.myform.value.date).getTime());
-    console.log(new Date(new Date(this.myform.value.date).getTime()));
-    
+    const details = {
+      hospitalId: this.hosId,
+      doctor: this.docId,
+      description: this.myform.value.remark,
+      status: this.myform.value.status,
+      appointmentDate: this.myform.value.date.getTime()
+    };
+    this.hospitalService.newAppointment(details)
+      .subscribe(res=>{
+        if(res.status == 200){
+          this.router.navigate(['..'], { relativeTo: this.activatedRoute})
+        }
+      })
   }
 }

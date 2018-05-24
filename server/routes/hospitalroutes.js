@@ -113,5 +113,33 @@ module.exports = function(app) {
           res.status(400).send(e);
         }      
       });
-      
+      // Appointment routes
+      app.post('/appointmentRequest', authenticate, async (req, res) => {
+        try {
+          const ids = [req.body.hospitalId, req.body.doctor]
+          for (const id of ids) {
+            if (!ObjectID.isValid(id)) {
+              return res.status(404).send();
+            }
+          }
+          console.log(req.body);
+          const hospital = await Hospital.findById(req.body.hospitalId);
+          if (!hospital) {
+            return res.status(404).send({ hospital: 'Nothing found' });
+          }
+          var appointmentDetails = {
+            description: req.body.remark,
+            doctor: req.body.doctorId,
+            patient: req.user._id,
+            status: req.body.status,
+            appointmentDate: req.body.date
+          }
+          const postDetails = await hospital.newAppointment(appointmentDetails);
+          res.status(200).send(postDetails);
+        } catch (e) {
+          console.log(e);
+          res.status(400).send(e);
+        }
+      });
+
 };  

@@ -16,11 +16,11 @@ const patientProfileRoutes: Routes = [
   {
     path: 'patientProfile',
     component: PatientProfileComponent,
-    //canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     children: [
       {
        path:'',
-       //canActivateChild: [AuthGuard],
+       canActivateChild: [AuthGuard],
        children:[
         {
           path: 'mydoctors',

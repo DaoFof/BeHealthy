@@ -85,4 +85,10 @@ export class HospitalService {
     let url = `/addDoctorHospital`;
     return this.updateDoctorHospital(url,data)
   }
+
+  //appointment
+  newAppointment(data){
+    let url = `/appointmentRequest`;
+    return this.post(url, data);
+  }
 }
