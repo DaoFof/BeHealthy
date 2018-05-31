@@ -18,12 +18,12 @@
             <br>
             <div class="row">
               <div class="col-xs-6">
-                <p class="btn btn-primary btn-block" (click)="accept(request._id, i)">Accept
+                <p class="btn btn-primary btn-block" (click)="actionRequest(request.request._id, i, true)">Accept
                   <span class="fa fa-thumbs-up"></span>
                 </p>
               </div>
               <div class="col-xs-6">
-                <p class="btn btn-danger btn-block" (click)="deny(request.request_id, i)">Deny
+                <p class="btn btn-danger btn-block" (click)="actionRequest(request.request._id, i, false)">Deny
                   <span class="fa fa-thumbs-down"></span>
                 </p>
               </div>

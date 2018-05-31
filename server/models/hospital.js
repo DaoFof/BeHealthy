@@ -62,7 +62,8 @@ var HospitalSchema = new mongoose.Schema({
             default: 0
         }
     }],
-    appointmentRequest : [appointmentSchema]
+    appointmentRequest : [appointmentSchema],
+    acceptedAppoint: [appointmentSchema]
 });
 
 HospitalSchema.methods.addDepartment = async function (depart){
@@ -91,7 +92,39 @@ HospitalSchema.methods.newAppointment = async function(details){
     }
     return await hospital.update(update);
 }
+function findRequest(id, hospital) {
+    for (const request of hospital.appointmentRequest) {
+        if (request._id == id) {
+            return request
+        }
+    }
+}
+HospitalSchema.methods.acceptAppoint = async function(id){
+    var hospital = this;
+    var request = findRequest(id, hospital);
+    var update = {
+        $pull: {
+            "appointmentRequest": findRequest(id, hospital)
+        },
+        $push: {
+            "acceptedAppoint": findRequest(id, hospital)
+        }
+    }
+    var res = await hospital.update(update);
+    return { res, request}
+}
 
+HospitalSchema.methods.denyAppoint = async function (id) {
+    var hospital = this;
+    var request = findRequest(id, hospital);
+    var update = {
+        $pull: {
+            "appointmentRequest": findRequest(id, hospital)
+        }
+    }
+    var res = await hospital.update(update);
+    return { res, request }
+}
 var Hospital =  mongoose.model('Hospital', HospitalSchema);
 
 module.exports = {Hospital, HospitalSchema};

@@ -164,4 +164,36 @@ module.exports = function(app) {
           res.status(400).send(e);
         }
       });
+
+      app.patch('/acceptAppointRequest', authenticate, async (req, res) => {
+        try {
+          query = {
+            "appointmentRequest._id": req.body.id
+          }
+          var hospital = await Hospital.findOne(query);
+          let result = await hospital.acceptAppoint(req.body.id);
+          var appointDetails = { appointId: result.request._id};
+          const doctor = await User.findByIdAndUpdate(result.request.doctor,
+             { $push: { 'doctor.appointmentRequest': appointDetails } }, 
+             { new: true }
+            );
+          res.status(200).send({ result });
+        } catch (e) {
+          console.log(e);
+          res.status(400).send(e);
+        }
+      });
+  app.patch('/denyAppointRequest', authenticate, async (req, res) => {
+    try {
+      query = {
+        "appointmentRequest._id": req.body.id
+      }
+      var hospital = await Hospital.findOne(query);
+      let result = await hospital.denyAppoint(req.body.id);
+      res.status(200).send({ result });
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  });
 };  

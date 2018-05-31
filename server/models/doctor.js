@@ -27,6 +27,16 @@ hospitals:[{
         required: false // MAKE IT TRUE LATER
     },
 }],
+appointmentRequest: [{
+    appointId:{
+        type: mongoose.Schema.Types.ObjectId
+    }
+}],
+appointmentAccepted: [{
+    appointId: {
+        type: mongoose.Schema.Types.ObjectId
+    }
+}],
 expertiseRate:{
     type: Number,
     /*required: true,*/

@@ -96,4 +96,14 @@ export class HospitalService {
     let url = '/getManagerAppoint';
     return this.getAll(url);
   }
+  acceptAppoint(id){
+    let url = `/acceptAppointRequest`;
+    let headers = this.getToken();
+    return this.http.patch(url, { id }, { headers, observe: 'response' });
+  }
+  denyAppoint(id){
+    let url = `/denyAppointRequest`;
+    let headers = this.getToken();
+    return this.http.patch(url, { id }, { headers, observe: 'response' });
+  }
 }

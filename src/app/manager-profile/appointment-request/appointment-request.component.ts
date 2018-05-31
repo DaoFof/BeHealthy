@@ -10,7 +10,7 @@ import { PaginationInstance } from 'ngx-pagination';
     trigger('requests', [
       transition('* => *', [
         query(':enter', style({ opacity: 0 }), { optional: true }),
-        query(':enter', stagger('300ms', [
+        query(':enter', stagger('500ms', [
           animate('.6s ease-in', keyframes([
             style({ opacity: 0, transform: 'translateY(-75%)', offset: 0 }),
             style({ opacity: .5, transform: 'translateY(35px)', offset: .3 }),
@@ -37,6 +37,25 @@ export class AppointmentRequestComponent implements OnInit {
         this.requests = res.body['appoints'];
       })
   }
+  actionRequest(id, i, decision){
+    if(decision){
+      this.hospitalService.acceptAppoint(id)
+        .subscribe(res => {
+          if (res.status == 200) {
+            this.requests.splice(i, 1);
+          }
+        })
+    }else{
+
+      this.hospitalService.denyAppoint(id)
+        .subscribe(res => {
+          if (res.status == 200) {
+            this.requests.splice(i, 1);
+          }
+        })
+    }
+  }
+
   getDate(timestamp){
     return new Date(timestamp).toUTCString().substring(0, 25);
   }
