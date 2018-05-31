@@ -11,13 +11,31 @@
       <ul class="list-unstyled components">
           <p>{{user.firstName}} {{user.lastName}}</p>
           <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Manager Doctors <span class="badge badge-danger">{{notificationLength}}</span></a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
+              <a href="#doctorCollapse" data-toggle="collapse" aria-expanded="false">Manage Doctors <span class="badge badge-danger">{{notificationLength}}</span></a>
+              <ul class="collapse  list-unstyled" id="doctorCollapse">
                   <li><a routerLink="doctorregistration">Doctor Request <span class="badge">{{user.manager.doctorRequest.length}}</span></a></li>
                   <li><a href="#">Home 2</a></li>
                   <li><a href="#">Home 3</a></li>
               </ul>
           </li>
+        <li class="">
+            <a href="#appointCollapse" data-toggle="collapse" aria-expanded="false">Manage Appointments 
+                <span class="badge badge-danger">{{notificationLength}}</span>
+            </a>
+            <ul class="collapse list-unstyled" id="appointCollapse">
+                <li>
+                    <a routerLink="appointmentrequests">Appointment Request
+                        <span class="badge">{{user.manager.doctorRequest.length}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+            </ul>
+        </li>
           <li>
               <a href="#">About</a>
               <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Manage Hospitals</a>

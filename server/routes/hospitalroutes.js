@@ -1,4 +1,5 @@
 var {Hospital} = require('../models/hospital');
+var { User } = require('../models/user');
 const {ObjectID} = require ('mongodb');
 const _ = require('lodash');
 
@@ -58,9 +59,6 @@ module.exports = function(app) {
       app.get('/managerHospital', authenticate, async(req, res)=>{
         try{
           var id = req.user._id;
-          if (!ObjectID.isValid(id)) {
-            return res.status(404).send();
-          }
           const hospital = await Hospital.find({
             managerId: id
           });
@@ -122,18 +120,19 @@ module.exports = function(app) {
               return res.status(404).send();
             }
           }
-          console.log(req.body);
+          //console.log(req.body);
           const hospital = await Hospital.findById(req.body.hospitalId);
           if (!hospital) {
             return res.status(404).send({ hospital: 'Nothing found' });
           }
           var appointmentDetails = {
-            description: req.body.remark,
-            doctor: req.body.doctorId,
-            patient: req.user._id,
-            status: req.body.status,
-            appointmentDate: req.body.date
+            'description': req.body.description,
+            'doctor': req.body.doctor,
+            'patient': req.user._id,
+            'status': req.body.status,
+            'appointmentDate': req.body.appointmentDate
           }
+          console.log(req.body);
           const postDetails = await hospital.newAppointment(appointmentDetails);
           res.status(200).send(postDetails);
         } catch (e) {
@@ -141,5 +140,28 @@ module.exports = function(app) {
           res.status(400).send(e);
         }
       });
+      app.get('/getManagerAppoint', authenticate, async(req, res)=>{
+        try {
+          const hospitals = await Hospital.find({
+            managerId: req.user._id, 
+            $where: "this.appointmentRequest.length > 0" 
+          });
+          if (hospitals.length == 0)
+            return res.status(404).send({ hospital: 'Nothing found' });
 
+          const appoints = [];
+          for (const hospital of hospitals) {
+            for (let request of hospital.appointmentRequest) {
+              const users = await User.find({
+                _id: { $in: [request.doctor, request.patient] }
+              });
+              request = {users , request, hospitalname: hospital.name};
+              appoints.push(request);
+            }
+          }
+          res.send({ appoints });
+        } catch (e) {
+          res.status(400).send(e);
+        }
+      });
 };  

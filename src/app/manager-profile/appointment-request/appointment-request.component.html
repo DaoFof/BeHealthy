@@ -1,0 +1,50 @@
+<div class="container">
+
+  <!-- Projects Row -->
+  <div *ngIf="requests.length > 0; else elseBlock">
+    <div class="row" [@requests]="requests.length">
+      <div class="col-md-4 portfolio-item" *ngFor="let request of requests | paginate: { itemsPerPage: 3, currentPage: p }; let i = index">
+        <div class="card h-100">
+          <a href="#">
+            <h3>{{request.hospitalname}}</h3>
+          </a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <p> Date : {{getDate(request.request.appointmentDate)}}</p>
+            </h4>
+            <h5><b>{{createName(request.users[1])}}</b></h5>
+            <h5>Requested to visit: <b>{{createName(request.users[0])}}</b></h5>
+            <h5>Status: <b class="text-danger">{{request.request.status}}</b></h5>
+            <br>
+            <div class="row">
+              <div class="col-xs-6">
+                <p class="btn btn-primary btn-block" (click)="accept(request._id, i)">Accept
+                  <span class="fa fa-thumbs-up"></span>
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <p class="btn btn-danger btn-block" (click)="deny(request.request_id, i)">Deny
+                  <span class="fa fa-thumbs-down"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="row">
+      <div class="col-xs-offset-3 col-xs-6">
+        <h1 class="text-center">
+          No actual request
+        </h1>
+      </div>
+    </div>
+  </ng-template>
+  <!-- /.row -->
+  <hr>
+</div>

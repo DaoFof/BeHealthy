@@ -87,8 +87,13 @@ export class HospitalService {
   }
 
   //appointment
+
   newAppointment(data){
     let url = `/appointmentRequest`;
     return this.post(url, data);
+  }
+  getManagerAppointement(){
+    let url = '/getManagerAppoint';
+    return this.getAll(url);
   }
 }
