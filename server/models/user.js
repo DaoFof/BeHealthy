@@ -228,12 +228,17 @@ UserSchema.methods.addDoctorRequest = async function (doctor, hospitalName){
   return await user.update(update);
 }
 function findRequest(id, user) {
-  for (const request of user.manager.doctorRequest) {
-    if (request._id == id) {
-      return request
+  if(user.userType == "Hospital Manager"){
+    for (const request of user.manager.doctorRequest) {
+      if (request._id == id) return request
+    }
+  } else if (user.userType == "Doctor"){
+    for (const request of user.doctor.appointmentRequest) {
+      if (request._id == id) return request
     }
   }
 }
+//Manager
 UserSchema.methods.acceptDoctorRequest = async function(id){
   var user = this;
   var request = findRequest(id, user);
@@ -257,6 +262,39 @@ UserSchema.methods.denyDoctorRequest = async function (id) {
   }
   return await user.update(update);
 }
+//End
+//Doctor
+UserSchema.methods.actionAppointRequest =  async function(id, decision){
+  var user = this;
+  var request = findRequest(id, user);
+  var update = {
+    $pull: {
+      "doctor.appointmentRequest": request
+    }
+  };
+  if(!decision){
+    var res = await user.update(update);
+    return { res, request }
+  }
+
+  update.$push = {
+    "doctor.appointmentAccepted": request
+  }
+  var res = await user.update(update);
+  return { res, request }
+}
+UserSchema.methods.denyAppointRequest = async function (id) {
+  var user = this;
+  var request = findRequest(id, user);
+  var update = {
+    $pull: {
+      "doctor.appointmentRequest": request
+    }
+  }
+  var res = await user.update(update);
+  return { res, "requestId": request._id }
+}
+//End
 
 var User = mongoose.model('User', UserSchema);
 

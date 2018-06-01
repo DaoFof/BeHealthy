@@ -9,19 +9,27 @@
             <h3>{{request.hospitalname}}</h3>
           </a>
           <div class="card-body">
-            <h5>Requested to visit:
-              <b>{{createName(request.doctor[0])}}</b>
+            <h5>Appointment Requested by:
+              <b>{{createName(request.users[0])}}</b>
             </h5>
             <h4 class="card-title">
-              <p>For date : {{getDate(request.request.appointmentDate)}}</p>
+              <p> For date : {{getDate(request.request.appointmentDate)}}</p>
             </h4>
             <h5>Status:
               <b class="text-danger">{{request.request.status}}</b>
             </h5>
             <br>
             <div class="row">
-              <p class="btn btn-danger btn-block" (click)="actionRequest(request.request._id, i, false)">Cancel
-              </p>
+              <div class="col-xs-6">
+                <p class="btn btn-primary btn-block" (click)="actionRequest(request.request._id, i, true)">Accept
+                  <span class="fa fa-thumbs-up"></span>
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <p class="btn btn-danger btn-block" (click)="actionRequest(request.request._id, i, false)">Deny
+                  <span class="fa fa-thumbs-down"></span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

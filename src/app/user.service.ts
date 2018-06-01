@@ -32,6 +32,10 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  private getAll(url: string) {
+    let headers = this.getToken();
+    return this.http.get(url, { headers, observe: 'response' });
+  }
 
   private extractData(res: HttpResponse<Promise<any>>) {
     return res;
@@ -50,4 +54,11 @@ export class UserService {
     return this.getDoctors(url);
   }
 
+  //doctor
+
+  actionAppoint(id, decision){
+    let url = `/docActionAppointRequest`;
+    let headers = this.getToken();
+    return this.http.patch(url, { id, decision }, { headers, observe: 'response' });
+  }
 }

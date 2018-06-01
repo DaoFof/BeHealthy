@@ -57,10 +57,9 @@ export class RegistrationComponent implements OnInit {
       .subscribe(resp=>{
         console.log(resp);
         this.responseBody =  resp.body;
-        const keys = resp.headers.keys();
-        this.headers = keys.map(key=>
-        JSON.parse(`{\"${key}\": \"${resp.headers.get(key)}\"}`));
-        localStorage.setItem('token', this.headers[1]['x-auth']);
+        let token = resp.headers.get('x-auth');
+        localStorage.setItem('token', token);
+        console.log(resp.status);
         if(resp.status == 200){
           this.router.navigate(['fillprofile']);
         }

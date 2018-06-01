@@ -96,6 +96,10 @@ export class HospitalService {
     let url = '/getManagerAppoint';
     return this.getAll(url);
   }
+  getPatientAppointement() {
+    let url = '/getPatientAppoint';
+    return this.getAll(url);
+  }
   acceptAppoint(id){
     let url = `/acceptAppointRequest`;
     let headers = this.getToken();
@@ -105,5 +109,10 @@ export class HospitalService {
     let url = `/denyAppointRequest`;
     let headers = this.getToken();
     return this.http.patch(url, { id }, { headers, observe: 'response' });
+  }
+
+  getDoctorAppointement(){
+    let url = '/getDoctorAppoint';
+    return this.getAll(url);
   }
 }

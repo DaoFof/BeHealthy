@@ -164,6 +164,29 @@ module.exports = function(app) {
           res.status(400).send(e);
         }
       });
+      app.get('/getPatientAppoint', authenticate, async (req, res) => {
+        try {
+          const hospitals = await Hospital.find({
+            "acceptedAppoint.patient": req.user._id
+          });
+          if (hospitals.length == 0)
+            return res.status(404).send({ hospital: 'Nothing found' });
+
+          const appoints = [];
+          for (const hospital of hospitals) {
+            for (let request of hospital.acceptedAppoint) {
+              const doctor = await User.find({
+                _id: request.doctor
+              });
+              request = { doctor, request, hospitalname: hospital.name };
+              appoints.push(request);
+            }
+          }
+          res.send({ appoints });
+        } catch (e) {
+          res.status(400).send(e);
+        }
+      });
 
       app.patch('/acceptAppointRequest', authenticate, async (req, res) => {
         try {
@@ -176,7 +199,11 @@ module.exports = function(app) {
           const doctor = await User.findByIdAndUpdate(result.request.doctor,
              { $push: { 'doctor.appointmentRequest': appointDetails } }, 
              { new: true }
-            );
+          );
+          const patient = await User.findByIdAndUpdate(result.request.patient,
+            { $push: { 'patient.appointments': appointDetails } },
+            { new: true }
+          );
           res.status(200).send({ result });
         } catch (e) {
           console.log(e);
@@ -193,6 +220,39 @@ module.exports = function(app) {
       res.status(200).send({ result });
     } catch (e) {
       console.log(e);
+      res.status(400).send(e);
+    }
+  });
+
+
+  app.get('/getDoctorAppoint', authenticate, async (req, res) => {
+    try {
+      let appointIdList = [], appointsIds = [];
+      //from user
+      for (const appoint of req.user.doctor.appointmentRequest) {
+        appointIdList.push(appoint.appointId);
+        appointsIds.push(appoint);
+      }
+      //end from user
+      const hospitals = await Hospital.find({
+        "acceptedAppoint._id": { $in: appointIdList }
+      });
+      /*if (hospitals.length == 0)
+        return res.status(404).send({ hospital: 'Nothing found' });
+*/
+      const appoints = [];
+      for (const hospital of hospitals) {
+        for (let request of hospital.acceptedAppoint) {
+          const users = await User.find({
+            _id: request.patient
+          });
+          request = { users, request, hospitalname: hospital.name };
+          appoints.push(request);
+        }
+      }
+      console.log(req.user.doctor);
+      res.send({ appoints, appointsIds });
+    } catch (e) {
       res.status(400).send(e);
     }
   });

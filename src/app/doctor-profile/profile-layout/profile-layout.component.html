@@ -28,6 +28,24 @@
           </li>
         </ul>
       </li>
+      <li class="">
+        <a href="#appointCollapse" data-toggle="collapse" aria-expanded="false">Manage Appointments
+          <span class="badge badge-danger">{{notificationLength}}</span>
+        </a>
+        <ul class="collapse list-unstyled" id="appointCollapse">
+          <li>
+            <a routerLink="appointmentrequests">Appointment Request
+              <span class="badge">{{user.manager.doctorRequest.length }}</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">Home 2</a>
+          </li>
+          <li>
+            <a href="#">Home 3</a>
+          </li>
+        </ul>
+      </li>
       <li>
         <a href="#">About</a>
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Manage Hospitals</a>

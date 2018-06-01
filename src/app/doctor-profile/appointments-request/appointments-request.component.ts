@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
-import { HospitalService } from '../../../hospital.service';
-
+import { HospitalService } from '../../hospital.service';
+import { UserService } from '../../user.service';
+import { PaginationInstance } from 'ngx-pagination';
 @Component({
-  selector: 'app-appointments',
-  templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css'],
+  selector: 'app-appointment-request',
+  templateUrl: './appointments-request.component.html',
+  styleUrls: ['./appointments-request.component.css'],
   animations: [
     trigger('requests', [
       transition('* => *', [
@@ -26,16 +27,31 @@ import { HospitalService } from '../../../hospital.service';
     ])
   ]
 })
-export class AppointmentsComponent implements OnInit {
+export class AppointmentRequestComponent implements OnInit {
 
-  constructor(private hospitalService: HospitalService) { }
+  constructor(private hospitalService: HospitalService, private userService: UserService) { }
   requests = [];
+  appointsId = [];
   ngOnInit() {
-    this.hospitalService.getPatientAppointement()
+    this.hospitalService.getDoctorAppointement()
       .subscribe(res => {
+        console.log(res);
         this.requests = res.body['appoints'];
-
-        console.log(this.requests);
+        this.appointsId = res.body['appointsIds'];
+      })
+  }
+  getAppointId(appointId){
+    for (const appoint of this.appointsId) {
+      if (appointId == appoint.appointId) return appoint._id
+    }
+  }
+  actionRequest(id, i, decision) {
+    this.userService.actionAppoint(this.getAppointId(id), decision)
+      .subscribe(res => {
+        console.log(res);
+        if (res.status == 200) {
+          this.requests.splice(i, 1);
+        }
       })
   }
 

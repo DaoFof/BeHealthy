@@ -3,20 +3,25 @@ var {Doctor} = require('./doctor');
 var {Hospital} = require('./hospital');
 
 var PatientSchema = new mongoose.Schema({
-job:{
-    type: String,
-    required: false,
-},
-visitedDoctors:[{
-    doctorId:{
+    job:{
         type: String,
-        required: true
+        required: false,
     },
-    name:{
-        type: String,
-        required: false
-    }
-}]
+    visitedDoctors:[{
+        doctorId:{
+            type: String,
+            required: true
+        },
+        name:{
+            type: String,
+            required: false
+        }
+    }],
+    appointments: [{
+        appointId: {
+            type: mongoose.Schema.Types.ObjectId
+        }
+    }]
 });
 
 PatientSchema.methods.addDoctor = async function (params) {

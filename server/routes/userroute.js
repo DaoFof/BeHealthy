@@ -2,7 +2,7 @@ const _ = require('lodash');
 const mongoose = require('mongoose');
 const {ObjectID} = require ('mongodb');
 var {User} = require('../models/user');
-
+var { Hospital } = require('../models/hospital');
 var {authenticate} = require('../middleware/authenticate');
 
 module.exports = function(app, upload){
@@ -205,6 +205,25 @@ app.post('/users', async (req, res) => {
       res.status(400).send(e);
     }
   });
+  //End add doctor hospital and add request to manager
+  //Appointment route for doctor
+  app.patch('/docActionAppointRequest', authenticate, async (req, res) => {
+    try {
+      query = {
+        "doctor.appointmentRequest._id": req.body.id
+      }
+      const user = await User.findOne(query);
+      let result = await user.actionAppointRequest(req.body.id, req.body.decision);
+      //const doctor = await User.findByIdAndUpdate(result.doctorId, { $set: { 'allow': true } }, { new: true });
+      //update appointment if doctor deny 
+      res.status(200).send({ result });
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  });
+
+  //End appointment route for doctor
 // user picture upload route
   app.post('/uploadFile', authenticate, async (req, res)=>{
     upload(req, res, function (err) {
