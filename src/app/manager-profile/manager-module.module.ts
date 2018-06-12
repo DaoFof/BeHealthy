@@ -24,6 +24,7 @@ import { DoctorRegistrationComponent } from './doctor-registration/doctor-regist
 import { ManagerService } from '../manager.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
+import { PatientComponent } from './patient/patient.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,7 +46,8 @@ import { AppointmentRequestComponent } from './appointment-request/appointment-r
     EditHospitalComponent,
     DoctorRegistrationComponent,
     DashboardComponent,
-    AppointmentRequestComponent
+    AppointmentRequestComponent,
+    PatientComponent
   ], providers: [GoogleMapService,
      RegistrationService, 
      FileUploadService, 

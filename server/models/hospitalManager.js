@@ -48,6 +48,11 @@ var HospitalManager = new mongoose.Schema({
             type: String,
             required: false
         }
+    }],
+    patientList:[{
+        patient:{
+            type: mongoose.Schema.Types.ObjectId
+        }
     }]
 });
 

@@ -12,6 +12,7 @@ import { DoctorRegistrationComponent } from './doctor-registration/doctor-regist
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
 
+import { PatientComponent } from './patient/patient.component';
 import { AuthGuard } from '../auth-guard.service';
 
 const managerProfileRoutes: Routes = [
@@ -30,6 +31,9 @@ const managerProfileRoutes: Routes = [
           },{
             path: 'myhospitals',
             component: MyhospitalsComponent
+          },{
+            path: 'mypatient',
+            component: PatientComponent
           },{
             path:'newhospital',
             component: NewHospitalComponent

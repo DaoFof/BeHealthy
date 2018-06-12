@@ -204,6 +204,9 @@ module.exports = function(app) {
             { $push: { 'patient.appointments': appointDetails } },
             { new: true }
           );
+          const manager = await User.findByIdAndUpdate(req.user._id,
+            { $push: { 'manager.patientList': { patient: result.request.patient }}}
+          );
           res.status(200).send({ result });
         } catch (e) {
           console.log(e);

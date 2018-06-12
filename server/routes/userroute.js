@@ -206,6 +206,23 @@ app.post('/users', async (req, res) => {
     }
   });
   //End add doctor hospital and add request to manager
+  //get manager patient
+  app.get('/manager/patient', authenticate, async (req, res) => {
+    try {
+      var patientsIdList = req.user.manager.patientList;
+      var patientList = [];
+
+      for (const id of patientsIdList) {
+        const user = await User.findById(id.patient);
+        patientList.push(user);
+      }
+      res.status(200).send({ patientList });
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  });
+  //end get manager patient
   //Appointment route for doctor
   app.patch('/docActionAppointRequest', authenticate, async (req, res) => {
     try {
