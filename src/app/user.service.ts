@@ -67,4 +67,9 @@ export class UserService {
     let headers = this.getToken();
     return this.http.get(url, { headers, observe: 'response' });
   }
-}
+  patientDashboard() {
+    let url = '/dashboard/patient';
+    let headers = this.getToken();
+    return this.http.get(url, { headers, observe: 'response' });
+  }
+} 

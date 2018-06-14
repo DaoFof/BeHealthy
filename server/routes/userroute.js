@@ -241,6 +241,41 @@ app.post('/users', async (req, res) => {
   });
 
   //End appointment route for doctor
+  //patient dashboard query
+  app.get('/dashboard/patient', authenticate, async (req, res) => {
+    try {
+      function onlyUnique(value, index, self) {
+        return self.indexOf(value) !== -1;
+      }
+      var appointsIdList = req.user.patient.appointments;
+      var hospitalList = [];
+      var doctorsIdList = [];
+      var doctorList = [];
+      for (const id of appointsIdList) {
+        const hospital = await Hospital.findOne({
+          "acceptedAppoint._id": id.appointId
+        });
+        hospitalList.push(hospital);
+        for (const appoint of hospital.acceptedAppoint) {
+          if (doctorsIdList.indexOf(appoint.doctor) == -1){
+            doctorsIdList.push(appoint.doctor);
+          }
+        }
+      }
+      //var a = ['a', 1, 'a', 2, '1'];
+      var unique = doctorsIdList.filter(onlyUnique); 
+      console.log(unique);
+      for (const id of doctorsIdList) {
+        const user = await User.findById(id);
+        doctorList.push(user);
+      }
+      res.status(200).send({ hospitalList, doctorList });
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  });
+  //end
 // user picture upload route
   app.post('/uploadFile', authenticate, async (req, res)=>{
     upload(req, res, function (err) {

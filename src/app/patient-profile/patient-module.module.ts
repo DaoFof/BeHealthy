@@ -24,6 +24,7 @@ import { AppointmentSchedulerComponent } from './appointments/scheduler/schedule
 
 
 import { UserService } from '../user.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -47,6 +48,7 @@ import { UserService } from '../user.service';
     RequestAppointmentComponent,
     AppointmentsComponent,
     AppointmentSchedulerComponent,
+    DashboardComponent,
     //AppointmentSchedulerComponent
   ],
   providers:[

@@ -12,6 +12,7 @@ import { RequestAppointmentComponent } from './appointments/request/request.comp
 import { AppointmentsComponent } from './appointments/lists/lists.component';
 import { AppointmentSchedulerComponent } from './appointments/scheduler/scheduler.component';
 
+import { DashboardComponent } from './dashboard/dashboard.component';
 const patientProfileRoutes: Routes = [
   {
     path: 'patientProfile',
@@ -23,6 +24,9 @@ const patientProfileRoutes: Routes = [
        canActivateChild: [AuthGuard],
        children:[
         {
+          path: 'dashboard',
+          component: DashboardComponent
+        },{
           path: 'mydoctors',
           component: MydoctorsComponent
         },{
