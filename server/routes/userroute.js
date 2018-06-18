@@ -244,27 +244,19 @@ app.post('/users', async (req, res) => {
   //patient dashboard query
   app.get('/dashboard/patient', authenticate, async (req, res) => {
     try {
-      function onlyUnique(value, index, self) {
-        return self.indexOf(value) !== -1;
-      }
       var appointsIdList = req.user.patient.appointments;
-      var hospitalList = [];
-      var doctorsIdList = [];
-      var doctorList = [];
+      var hospitalList = [], doctorsIdList = [], doctorList = [];
       for (const id of appointsIdList) {
         const hospital = await Hospital.findOne({
           "acceptedAppoint._id": id.appointId
         });
         hospitalList.push(hospital);
         for (const appoint of hospital.acceptedAppoint) {
-          if (doctorsIdList.indexOf(appoint.doctor) == -1){
-            doctorsIdList.push(appoint.doctor);
+          if (doctorsIdList.indexOf(appoint.doctor.toString()) === -1){
+            doctorsIdList.push(appoint.doctor.toString());
           }
         }
       }
-      //var a = ['a', 1, 'a', 2, '1'];
-      var unique = doctorsIdList.filter(onlyUnique); 
-      console.log(unique);
       for (const id of doctorsIdList) {
         const user = await User.findById(id);
         doctorList.push(user);
