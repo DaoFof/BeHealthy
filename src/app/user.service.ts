@@ -61,6 +61,12 @@ export class UserService {
     let headers = this.getToken();
     return this.http.patch(url, { id, decision }, { headers, observe: 'response' });
   }
+
+  doctorDashboard(){
+    let url = '/dashboard/doctor'; 
+    let headers = this.getToken();
+    return this.http.get(url, { headers, observe: 'response' });
+  }
   //
   managerPatient(){
     let url = `/manager/patient`;

@@ -10,24 +10,6 @@
 
     <ul class="list-unstyled components">
       <p>{{user.firstName}} {{user.lastName}}</p>
-      <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Manager Doctors
-          <span class="badge badge-danger">5</span>
-        </a>
-        <ul class="collapse list-unstyled" id="homeSubmenu">
-          <li>
-            <a routerLink="doctorregistration">Doctor Request
-              <span class="badge">4</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">Home 2</a>
-          </li>
-          <li>
-            <a href="#">Home 3</a>
-          </li>
-        </ul>
-      </li>
       <li class="">
         <a href="#appointCollapse" data-toggle="collapse" aria-expanded="false">Manage Appointments
           <span class="badge badge-danger">{{notificationLength}}</span>
@@ -100,10 +82,7 @@
             <li routerLink='myhospitals' routerLinkActive="activated">
               <a>Hospitals</a>
             </li>
-            <li routerLink='mydoctors' routerLinkActive="activated">
-              <a>Doctors</a>
-            </li>
-            <li routerLink='mypatient' routerLinkActive="activated">
+            <li routerLink='mypatients' routerLinkActive="activated">
               <a>Patients</a>
             </li>
             <li routerLink='myprescriptions' routerLinkActive="activated">

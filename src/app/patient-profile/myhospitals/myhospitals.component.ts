@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user.service';
-import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-myhospitals',
   templateUrl: './myhospitals.component.html',
@@ -8,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MyhospitalsComponent implements OnInit {
   hospitals;
-  constructor(private router: Router, private r: ActivatedRoute, private userService: UserService) { }
+  constructor( private userService: UserService) { }
   loading: boolean = true;
   ngOnInit() {
     this.getUserHospital();

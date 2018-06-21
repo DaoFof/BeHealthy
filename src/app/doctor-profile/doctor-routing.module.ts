@@ -6,6 +6,10 @@ import { AuthGuard } from '../auth-guard.service';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { AppointmentRequestComponent } from './appointments-request/appointments-request.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyhospitalComponent } from './myhospital/myhospital.component';
+import { PatientComponent } from './mypatient/patient.component';
+
 const doctorProfileRoutes: Routes = [
   {
     path: 'doctorProfile',
@@ -19,6 +23,15 @@ const doctorProfileRoutes: Routes = [
       {
         path: 'appointment',
         component: AppointmentsComponent
+      }, {
+        path: 'dashboard',
+        component: DashboardComponent
+      }, {
+        path: 'myhospitals',
+        component: MyhospitalComponent
+      }, {
+        path: 'mypatients',
+        component: PatientComponent
       }
     ]
   },{

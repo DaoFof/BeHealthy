@@ -1,0 +1,28 @@
+<div class="container">
+  <div [ngClass]="{ 'hidden': loading }">
+    <div class="row">
+      <div class="col-xs-4 hospital-item" *ngFor="let hospital of hospitals | paginate: { itemsPerPage: 3, currentPage: p }">
+        <a href="#">
+          <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+        </a>
+        <h3>
+          <a href="#">{{hospital.name}}</a>
+        </h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius
+          vitae.</p>
+        <ul>
+          <li>City: {{hospital.city}}</li>
+          <li>Country: {{hospital.country}}</li>
+          <li>Email: {{hospital.email}}</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="text-center">
+        <pagination-controls class="pagination" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="lds-dual-ring" [ngClass]="{ 'hidden': !loading }"></div>
+</div>

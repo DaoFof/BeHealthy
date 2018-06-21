@@ -239,7 +239,39 @@ app.post('/users', async (req, res) => {
       res.status(400).send(e);
     }
   });
+  app.get('/dashboard/doctor', authenticate, async (req, res) => {
+    try {
+      var hospitals = req.user.doctor.hospitals, 
+        hospitalTosend = [],
+        appointmentAccepts = req.user.doctor.appointmentAccepted,
+        appointments = [],
+        docPatients = [],
+        usersIdList = [];
+      for (const hospital of hospitals) {
+        var temp = await Hospital.findById(hospital.hospitalId);
+        hospitalTosend.push(temp);
+        for (const appoint of temp.acceptedAppoint) {
+          appointments.push(appoint);
+        }
+      }
 
+      for(const acceptAppoint of appointmentAccepts){
+        for (const appointment of appointments) {
+          if (acceptAppoint.appointId.toString() == appointment._id.toString()){
+            var user = await User.findById(appointment.patient);
+            user._id = user._id.toString();
+            usersIdList.push(user._id);
+            docPatients.push(user);
+          }
+        }
+      }
+      
+      res.status(200).send({ 'hospitals': hospitalTosend,'patients': docPatients});
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  });
   //End appointment route for doctor
   //patient dashboard query
   app.get('/dashboard/patient', authenticate, async (req, res) => {

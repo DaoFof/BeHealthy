@@ -1,0 +1,47 @@
+.hospital-item {
+    margin-bottom: 25px;
+}
+ul{
+    list-style: none;
+}
+ul> li{
+    font-weight: bold;
+}
+#x {
+    position: absolute;
+    background: gray;
+    color: white;
+    top: -10px;
+    right: -10px;
+}
+
+div.lds-dual-ring{
+    margin-top: 15%;
+    margin-left: 45%;
+}
+.lds-dual-ring {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+    background: #000;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

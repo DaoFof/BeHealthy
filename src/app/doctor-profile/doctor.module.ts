@@ -14,6 +14,9 @@ import { LoginService } from '../login.service';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { AppointmentRequestComponent } from './appointments-request/appointments-request.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyhospitalComponent } from './myhospital/myhospital.component';
+import { PatientComponent } from './mypatient/patient.component';
 
 @NgModule({
   imports: [
@@ -24,7 +27,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
     NgMultiSelectDropDownModule.forRoot(),
     DoctorRoutingModule
   ],
-  declarations: [ChooseHospitalComponent, ProfileLayoutComponent, AppointmentRequestComponent, AppointmentsComponent],
+  declarations: [ChooseHospitalComponent, ProfileLayoutComponent, AppointmentRequestComponent, AppointmentsComponent, DashboardComponent, MyhospitalComponent, PatientComponent],
   providers:[
     GoogleMapService,
     AuthService,
