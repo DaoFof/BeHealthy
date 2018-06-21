@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../../login.service';
 import { UserService } from '../../user.service';
-import { HospitalService } from '../../hospital.service';
+//import { HospitalService } from '../../hospital.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

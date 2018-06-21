@@ -2,14 +2,6 @@
     <div [ngClass]="{ 'hidden': loading }">
         <div class="row">
             <div class="col-xs-4 hospital-item" *ngFor = "let hospital of hospitals | paginate: { itemsPerPage: 3, currentPage: p }">
-                <ng-template #template>
-                    <div class="modal-body text-center">
-                        <p>The data related to this hospital, will be lost Do you want to delete?
-                        </p>
-                        <button type="button" class="btn btn-danger" (click)="confirm(hospital._id)">Yes</button>
-                        <button type="button" class="btn btn-default" (click)="decline()">No</button>
-                    </div>
-                </ng-template>
                 <a href="#">
                     <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
@@ -23,18 +15,6 @@
                     <li>Country: {{hospital.country}}</li>
                     <li>Email: {{hospital.email}}</li>
                 </ul>
-                <div class="row">
-                    <button class="btn btn-info" (click)="sendtoHospitaldetail(hospital._id)">
-                        <span class="fa fa-arrow-right">See more detail</span>
-                    </button>
-                    <button class="btn btn-danger" (click)="openModal(template)">
-                        <span class="fa fa-trash">Delete hospital</span>
-                    </button>
-                    <button class="btn btn-primary" (click)="editPage(hospital._id)">
-                        <span class="fa fa-pen">Edit hospital</span>
-                    </button>
-                </div>
-                    
             </div>
         </div>
         <hr>
