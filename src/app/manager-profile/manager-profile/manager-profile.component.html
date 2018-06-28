@@ -14,8 +14,6 @@
               <a href="#doctorCollapse" data-toggle="collapse" aria-expanded="false">Manage Doctors <span class="badge badge-danger">{{notificationLength}}</span></a>
               <ul class="collapse  list-unstyled" id="doctorCollapse">
                   <li><a routerLink="doctorregistration">Doctor Request <span class="badge">{{user.manager.doctorRequest.length}}</span></a></li>
-                  <li><a href="#">Home 2</a></li>
-                  <li><a href="#">Home 3</a></li>
               </ul>
           </li>
         <li class="">
@@ -28,12 +26,6 @@
                         <span class="badge">{{user.manager.doctorRequest.length}}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
-                </li>
             </ul>
         </li>
           <li>
@@ -41,21 +33,12 @@
               <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Manage Hospitals</a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
                   <li><a routerLink="newhospital">New Hospital</a></li>
-                  <li><a href="#">Page 2</a></li>
-                  <li><a href="#">Page 3</a></li>
               </ul>
-          </li>
-          <li>
-              <a href="#">Portfolio</a>
-          </li>
-          <li>
-              <a href="#">Contact</a>
           </li>
       </ul>
 
       <ul class="list-unstyled CTAs">
-          <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-          <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
+          <li><a (click)="logout()" class="download">Log out</a></li>
       </ul>
   </nav>
 
@@ -78,7 +61,6 @@
                     <li routerLink='myhospitals' routerLinkActive ="activated"><a >Hospitals</a></li>
                     <li routerLink='mydoctors' routerLinkActive ="activated" ><a >Doctors</a></li>
                     <li routerLink='mypatient' routerLinkActive ="activated"><a >Patients</a></li>
-                    <li routerLink='myprescriptions' routerLinkActive ="activated"><a>Prescriptions</a></li>
                   </ul>
               </div>
           </div>

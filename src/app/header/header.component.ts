@@ -8,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   isCollapsed = true;
   constructor() { 
-    this.token = localStorage.getItem('token');
+    
   }
   token;
-
+  login = false;
   ngOnInit() {
+    this.token = localStorage.getItem('token');
+    if(this.token){
+      this.login = true;
+    }
   }
 
 }

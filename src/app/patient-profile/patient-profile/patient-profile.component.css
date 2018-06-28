@@ -147,8 +147,8 @@ ul.CTAs a {
 }
 
 a.download {
-    background: #fff;
-    color: #7386D5;
+    background: rgb(219, 13, 13);
+    color: rgb(250, 250, 250);
 }
 
 a.article, a.article:hover {

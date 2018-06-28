@@ -30,9 +30,20 @@
             <!--<li><a routerLink='/search' routerLinkActive="active">Search</a></li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a routerLink='/login'>
-                Login <span class="sr-only">(current)</span>
-            </a></li>
+            <li class="active" *ngIf="login ; else loginContent" >
+                <a routerLink='/login'>
+                    Profile
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <ng-template #loginContent>
+                <li class="active" >
+                    <a routerLink='/login'>
+                        Login
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ng-template>
         </ul>
     </div>
   </div>

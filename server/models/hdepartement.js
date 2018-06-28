@@ -1,27 +1,24 @@
 var mongoose = require('mongoose');
 
-var Departement = mongoose.model('Departement', {
-name:{
-    type: String,
-    required: true,
-    unique: true
-},
-contact:{
-    type: String,
-    required: false,
-},
-description:{
-    type:String,
-    required: true
-},
-created_on:{
-    type: Date,
-    default: Date.now
-}
-/*_creator: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
-}*/
-});
+var DepartmentSchema =  mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    contact: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    created_on: {
+        type: Date,
+        default: Date.now
+    }
+})
+var Departement = mongoose.model('Departement', DepartmentSchema);
 
 module.exports = {Departement};
