@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     let res = await this.loginService.getUser();
     this.user = res['body'];
     console.log(this.user);
-    this.doctors = +this.user.manager.acceptedDoctor.length;;
+    this.doctors = +this.user.manager.acceptedDoctor.length;
     this.doctorReq = +this.user.manager.doctorRequest.length;
     this.notificationLength += this.user.manager.doctorRequest.length;
     this.lat = this.user.lat;

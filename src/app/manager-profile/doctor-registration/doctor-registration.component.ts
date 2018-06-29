@@ -36,8 +36,8 @@ export class DoctorRegistrationComponent implements OnInit {
   getRequest(){
     this.managerService.retrieveDoctorRequest()
       .subscribe(res=>{
-        console.log(res.body['users']);
-        this.requests = res.body['users'][0]['manager']['doctorRequest'];
+        console.log(res.body);
+        this.requests = res.body['manager']['doctorRequest'];
       })
   }
   accept(id, i){

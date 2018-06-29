@@ -72,7 +72,6 @@ export class FillProfileComponent implements OnInit {
     }
   }
   onSubmit(){
-    console.log(this.myform.value);
     this.submitAttempt = true;
     if(this.myform.invalid){
       this.msg = "Please fill all above fields";
@@ -86,7 +85,6 @@ export class FillProfileComponent implements OnInit {
       this.myform.value.manager = {'job': this.myform.value.job};
       delete this.myform.value.job;
     }
-    console.log(this.myform.value);
     this.registrationService.updateInfo(this.myform.value)
       .subscribe(resp=>{
         console.log(resp);
@@ -113,8 +111,8 @@ export class FillProfileComponent implements OnInit {
   }
   getLocation(location){
     this.location = {
-      'lat': location.lat,
-      'lng': location.lng
+      'lat': location.lat || location.coords.latitude,
+      'lng': location.lng || location.coords.longitude
     }
   }
   async findMe() {

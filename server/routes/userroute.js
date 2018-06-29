@@ -146,6 +146,7 @@ app.post('/users', async (req, res) => {
   app.patch('/user',authenticate, async  (req, res)=>{
     try{
       var body = req.body;
+      console.log(body);
       var id =  req.user._id;
       const user = await User.findOneAndUpdate({_id : id},{$set : body}, {new : true});
       if(!user){

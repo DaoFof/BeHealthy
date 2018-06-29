@@ -24,7 +24,7 @@ export class ManagerService {
   }
 
   retrieveDoctorRequest(){
-    let url = `/manager`;
+    let url = `/users/me`;
     return this.getAllDoctorRequest(url);
   }
   acceptRequest(id){

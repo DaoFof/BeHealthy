@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import {LoginService} from '../login.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   isCollapsed = true;
-  constructor() { 
+  constructor(private loginService: LoginService, private router: Router) { 
     
   }
   token;
@@ -17,6 +18,17 @@ export class HeaderComponent implements OnInit {
     if(this.token){
       this.login = true;
     }
+  }
+  async goToUserProfil(){
+    var res = await this.loginService.getUser();
+    let userType = res['body'].userType;
+    let path = '';
+    if (userType == 'Hospital Manager') path = '/managerProfile'
+    else if (userType == 'Patient') path = '/patientProfile'
+    else
+      path = '/doctorProfile'
+
+    this.router.navigate([path]);
   }
 
 }
